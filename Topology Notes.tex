@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+% \usepackage[active,
+%             generate=topology_definitions,
+%             %extract-cmd={section},
+%             extract-env={definition,algorithm}]{extract}
+
+\usepackage[active,
+            generate=topology theorems,
+            %extract-cmd={section},
+            extract-env={theorem,corollary,claim}]{extract}
+
+\begin{extract*}
+  \usepackage{amsthm}
+  \usepackage{amsfonts, amsmath}
+  \usepackage[dvipsnames]{xcolor} 
+  %\newtheorem{theorem}{Theorem}
+  \theoremstyle{definition}
+  \definecolor{Tm}{rgb}{0,0,0.80}
+  %\newtheorem{definition}{Definition}
+  \newtheorem{definition}{\color{NavyBlue}{\textbf{Definition}}}
+  \newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}
+  \newtheorem{corollary}{\color{ForestGreen}{\textbf{Corollary}}}
+  %\newtheorem{example}{Example}
+  	\usepackage{bm}
+	\newcommand{\e}{\epsilon}
+	%\newcommand{\d}{\delta}
+	\newcommand{\D}{\Delta}
+	\newcommand{\R}{\mathbb{R}}
+	\newcommand{\Z}{\mathbb{Z}}
+	\newcommand{\U}{\mathcal{U}}
+	\usepackage{mathtools}
+	\DeclarePairedDelimiterX{\inp}[2]{\langle}{\rangle}{#1, #2}
+	\newcommand{\norm}[1]{\lVert#1\rVert}
+	\newcommand{\x}{\bm{x}}
+	\newcommand{\xib}{\bm{\xi}}
+	\usepackage{mathrsfs}
+	\usepackage{algpseudocode,algorithm,algorithmicx}
+	\algnewcommand\algorithmicforeach{\textbf{for each}}
+	\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+	\newcommand*\Let[2]{\State #1 $\gets$ #2}
+\end{extract*}
+\usepackage{algpseudocode,algorithm,algorithmicx}
+%\usepackage{amsfonts, amsmath}
+\usepackage{amssymb, geometry}
+\usepackage{scalefnt}
+\usepackage{setspace}
+\usepackage{color,hyperref}
+%\usepackage{epsfig,subfigure,morefloats}
+\usepackage{natbib}
+\usepackage{dsfont}
+\usepackage{color,hyperref}
+\usepackage{epstopdf}
+%\usepackage{amsthm}
+\usepackage{amssymb}
+%\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{booktabs,siunitx}
+\usepackage{bm}
+\usepackage[section]{placeins}
+%\usepackage{hypcap}
+\usepackage{afterpage}
+
+
+\setcounter{MaxMatrixCols}{10}
+
+\providecommand{\u}[1]{\protect\rule{.1in}{.1in}}
+\providecommand{\u}[1]{\protect\rule{.1in}{.1in}}
+% \newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+%\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}{\color{JungleGreen}Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}{Conjecture}
+% \newtheorem{corollary}{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+% \newtheorem{definition}{Definition}
+% \theoremstyle{definition}
+\newtheorem{example}{\color{WildStrawberry}Example}
+\newtheorem{exercise}{\color{YellowOrange}Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\theoremstyle{definition}
+%\newtheorem{solution}[theorem]{Solution}
+\newtheorem{solution}{\color{Goldenrod}Solution}
+\newtheorem{summary}[theorem]{Summary}
+\geometry{left=1in,right=1in,top=1in,bottom=1in}
+%\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+%\hypersetup{pdftex,colorlinks=true,allcolors=black,citecolor=black}
+
+%\usepackage{floatrow}
+\usepackage{float}
+\usepackage{indentfirst}
+
+% \algrenewcommand\alglinenumber[1]{
+%     {\sf\footnotesize\addfontfeatures{Colour=888888,Numbers=Monospaced}#1}}
+% \algrenewcommand\algorithmicrequire{\textbf{Precondition:}}
+%\algrenewcommand\algorithmicensure{\textbf{Postcondition:}}
+
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\graphicspath{{./figures/}}
+
+\usepackage{listings}
+\usepackage{subcaption} 
+\usepackage[toc,page]{appendix}
+%\usepackage[extendedchars]{grffile}
+
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+%% Math commands
+% \newcommand{\e}{\epsilon}
+% %\newcommand{\d}{\delta}
+% \newcommand{\D}{\Delta}
+% \newcommand{\R}{\mathbb{R}}
+% \newcommand{\Z}{\mathbb{Z}}
+% \usepackage{mathtools}
+% \DeclarePairedDelimiterX{\inp}[2]{\langle}{\rangle}{#1, #2}
+% \newcommand{\norm}[1]{\lVert#1\rVert}
+% \newcommand{\x}{\bm{x}}
+% \newcommand{\xib}{\bm{\xi}}
+% \usepackage{mathrsfs}
+
+
+\title{Topology Notes}
+\author{Rebekah Dix}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage 
+
+
+\end{document}
