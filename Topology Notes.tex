@@ -108,6 +108,7 @@
 
 \theoremstyle{plain}
 \newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
+\newtheorem{claim}{\color{ForestGreen}{\textbf{Claim}}}[section]
 \newtheorem{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
 \newtheorem{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
 \newtheorem{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
@@ -271,6 +272,7 @@
 \newcommand{\cG}{\mathscr G}
 
 \newcommand{\pP}{\mathcal P}
+\newcommand{\aAA}{\mathcal A}
 \newcommand{\vV}{\mathcal V}
 \newcommand{\dD}{\mathcal D}
 \newcommand{\mM}{\mathcal M}
@@ -279,6 +281,7 @@
 \newcommand{\hH}{\mathcal H}
 \newcommand{\tT}{\mathcal T}
 \newcommand{\bB}{\mathcal B}
+\newcommand{\zZ}{\mathcal Z}
 
 % Common collections
 \def\cA{\col{A}}
@@ -330,6 +333,383 @@
 \tableofcontents
 \newpage 
 
+\section{Set Theory}
+
+\begin{definition}[Set cardinality $\leq$]
+	Let $A, B$ be sets. $A$ has \navy{cardinality less than or equal to} $B$ (write $\abs{A} \leq \abs{B}$) if there exists an injection from $A$ to $B$. In notation,
+	\begin{equation}
+		\abs{A} \leq \abs{B} \iff \exists f:A \to B \text{ injective }
+	\end{equation} 
+\end{definition}
+
+\begin{theorem}[Cantor]
+	For all sets $X$ (including infinite), $X \not\geq \pP(X)$. That is, there does not exist an injection from $\pP(X)$ to $X$. 
+\end{theorem}
+\begin{proof}
+	The proof contains 2 steps:
+	\begin{enumerate}
+		\item Show that there is no surjection from $X$ to $\pP(X)$. 
+		\item Show that (i) implies that there is no injection from $\pP(X)$ to $X$. 
+	\end{enumerate}
+
+	We start by proving (ii) through the following lemma:
+	\begin{lemma}
+		Let $C,D$ be sets, $C \neq \emptyset$. If there is an injection $i:C \to D$, then there exists a surjection $j: D \to C$. 
+	\end{lemma}
+	\begin{proof}
+		
+	\end{proof}
+	The contrapositive of this lemma gives that no surjection from $D \to C$ implies no injection from $C \to D$. 
+\end{proof}
+
+\begin{theorem}[Informal statement of the axiom of choice]
+	Given a family $\fF$ of nonempty sets, it is possible to pick out an element from each set in the family. 
+\end{theorem}
+
+\begin{definition}[Partial order]
+	A \navy{partial order} is a pair $\aAA = (A, \triangleright)$ where $A \neq \emptyset$ such that  for $a,b,c \in A$
+	\begin{enumerate}
+		\item Antireflexivity: $a \triangleright a$ never happens.
+		\item Transitivity: $a \triangleright b, b \triangleright c \imp a \triangleright c$ 
+	\end{enumerate}
+\end{definition}
+\begin{remark}
+	With a partial order, you \emph{can} have incomparable elements. 
+\end{remark}
+
+\begin{example}[Partial order]
+	For any set $X$, a partial order is $(\pP(X), \subsetneq)$. For example, if $X=\Set{1,2}$, then $\Set{1}$ and $\Set{2}$ are incomparable. 
+\end{example}
+
+\begin{definition}[Maximal]
+	Let $(A, \triangleright)$ be a partial order. Then $m \in A$ is maximal if and only if no $a \triangleright m$. 
+\end{definition}
+
+\begin{example}[Maximal elements]
+	The following are examples of posets and their maximal elements: 
+	\begin{enumerate}
+		\item $(\NN, <)$ has no maximal element (there is no largest natural number).
+		\item $(\Set{\Set{1},\Set{2}}, \subsetneq)$ has 2 maximal elements, since the two elements of the set are not comparable. 
+	\end{enumerate}
+\end{example}
+
+\begin{definition}[Chain]
+	A \navy{chain} in a partial order $(A, \triangleright)$ is a $C \subseteq A$ such that $\forall a,b \in C$, $a=b$ or $a \triangleright b$ or $b \triangleright a$. (One interpretation in words, ``$C$ is linear'') 
+\end{definition}
+
+\begin{theorem}[Zorn's Lemma]
+	Let $(A, \triangleright)$ be a partial order such that the following condition is satisfied:
+	\begin{itemize}
+		\item[($\zZ$)] In words, if every chain has an upper bound then there is a maximal element. More precisely, ff $C$ is a chain, then $\exists x$ such that $x \triangle$
+	\end{itemize}
+\end{theorem}
+
+\section{Topological Spaces}
+
+\begin{definition}[Topology, Topological Space]
+	A \navy{topological space} is a pair $(X,\tT)$ where $X$ is a nonempty set and $\tT$ is a set of subsets of $X$ (called a \navy{topology}) having the following properties:
+	\begin{enumerate}
+		\item $\emptyset$ and $X$ are in $\tT$.
+		\begin{equation}
+			\emptyset \in \tT,\ X \in \tT
+		\end{equation}
+		\item The union of \textit{arbitrarily} many sets in $\tT$ is in $\tT$.
+		\begin{equation}
+			A_\eta \in \tT \ \forall \eta \in H \imp \bigcup_{\eta \in H} A_\eta = \Set{a \in X \text{ for some (that is, } a \in A_\eta \text{)}} \in \tT
+		\end{equation}
+		\item The intersection a \textit{finite} number of sets in $\tT$ is in $\tT$.
+		\begin{equation}
+			A_1, \ldots, A_n \in \tT \imp A_1 \cap \cdots \cap A_n \in \tT
+		\end{equation}
+	\end{enumerate}
+	A set $X$ for which a topology $\tT$ has been specified is called a \navy{topological space}, that is, the pair $(X,\tT)$.
+\end{definition}
+
+\begin{example}[Examples of topologies]
+The following are examples of topologies/topological spaces:
+\begin{enumerate}
+	\item The collection consisting of $X$ and $\emptyset$ is called the \navy{trivial topology} or \navy{indiscrete topology}. 
+	\begin{enumerate}
+		\item $\tT = \Set{\emptyset, X}$
+	\end{enumerate}
+	\item If $X$ is any set, the collection of all subsets of $X$ is a topology on $X$, called the \navy{discrete topology}.
+	\begin{enumerate}
+		\item $\tT = \pP(X)$
+	\end{enumerate}
+	\item Let $X = \Set{1}$. Then $\tT = \Set{\emptyset, \Set{1}}$ is a topology.
+	\item Sierpinski: Let $X = \Set{a,b}$ and $\tT = \Set{\emptyset, X, \Set{a}}$. In this topology, $b$ is glued to $a$. That is, we can't have a set with $b$ and without $a$. However, $a$ is \emph{not} glued to $a$. 
+	\begin{remark}
+	Observe that from these examples,
+	\begin{equation*}
+		\text{indiscrete} \subsetneq \text{Sierpinski} \subsetneq \text{discrete}
+	\end{equation*}
+	\end{remark}	
+	\item $X = \RR$ and $\tT = \Set{\emptyset, X} \cup \Set{[a,\infty); a \in \RR}$.
+\end{enumerate}
+\end{example}
+
+
+% \begin{definition}[Open set]
+% 	If $X$ is a topological space with topology $\tT$, we say that a subset $U$ of $X$ is an \navy{open set} of $X$ if $U$ belongs to the collection $\tT$.
+% \end{definition}
+
+% \begin{definition}[Discrete Topology, Trivial Topology]
+% 	If $X$ is any set, the collection of all subsets of $X$ is a topology on $X$, called the \navy{discrete topology}. The collection consisting of $X$ and $\emptyset$ is called the \navy{trivial topology}.
+% \end{definition}
+
+% \begin{example}[Finite Complement Topology]
+% 	Let $X$ be a set. Let $\tT_f$ be the collection of all subsets of $U$ of $X$ such that $X-U$ is either finite or all of $X$. This is topology. We check the three conditions.
+% 	\begin{enumerate}
+% 		\item $X \in \tT_f$ since $X - X$ is the empty set, and hence finite. $\emptyset \in \tT_f$ since $X - \emptyset = X$ is all of $X$.
+% 		\item Let $\{U_\alpha\}$ be an arbitrary of elements of $\tT_f$. Then
+% 		\begin{align*}
+% 			X - \bigcup U_\alpha &= X - \left(U_{\alpha_1} \cup \cdots \cup U_{\alpha_n}  \cdots \right) \\
+% 			&= (X - U_{\alpha_1}) \cap \cdots \cap (X - U_{\alpha_n}) \cdots \\
+% 			&= \bigcap (X - U_\alpha)
+% 		\end{align*}
+% 		Since each $U_\alpha \in \tT_f$, we know that each $X - U_\alpha$ is finite. The intersection of finite sets is finite, so $\{U_\alpha\} \in \tT_f$. 
+% 		\item Let $\{U_i\}$ be a finite collection of sets in $\tT_f$. Then
+% 		\begin{align*}
+% 			X - \bigcap U_i &= X - \left(U_1 \cap \cdots \cap U_n \right) \\
+% 			&= (X - U_1) \cup \cdots \cup (X - U_n) \\
+% 			&= \bigcup (X - U_i)
+% 		\end{align*}
+% 		This is a finite union of finite sets, which is also finite. 
+% 	\end{enumerate}
+% \end{example}
+
+% \begin{definition}[(Strictly) Finer, (Strictly) Coarser, Comparable]
+% 	Suppose $\tT$ and $\tT'$ are two topologies on a given set $X$. If $\tT' \supset \tT$, we say that $\tT'$ is \navy{finer} than $\tT$. If $\tT'$ properly contains $\tT$, we say that $\tT'$ is \navy{strictly finer} than $\tT$. For these respective situations, we say that $\tT$ is \navy{coarser} or \navy{strictly coarser} than $\tT'$. We say that $\tT$ is \navy{comparable} with $\tT'$ if either $\tT' \supset \tT$ or $\tT \supset \tT'$.
+% \end{definition}
+
+
+% \section{Basis for a Topology}
+
+% \begin{definition}[Basis, Basis Elements, Topology $\tT$ generated by $\bB$]
+% 	If $X$ is a set, a \navy{basis} for a topology on $X$ is a collection $\bB$ of subsets of $X$ (called \navy{basis elements}) such that
+% 	\begin{enumerate}
+% 		\item For each $x \in X$, there is at least one basis element $B$ containing $x$.
+% 		\item If $x$ belongs to the intersection of two basis elements $B_1$ and $B_2$, then there is a basis element $B_3$ containing $x$ such that $B_3 \subset B_1 \cap B_2$.
+% 	\end{enumerate}
+% 	If $\bB$ satisfies these two conditions, then we define the \navy{topology $\tT$ generated by $\bB$} as follows: A subset $U$ of $X$ is said to be open in $X$ (that is, to be an element of $\tT$) if for each $x \in U$, there is a basis element $B \in \bB$ such that $x \in B$ and $B \subset U$. Note that each basis element is itself an element of $\tT$.
+% \end{definition}
+
+% \begin{theorem}[Collection $\tT$ generated by a basis $\bB$ is a topology on $X$]
+% \end{theorem}
+% \begin{proof}
+% 	We check the three conditions:
+% 	\begin{enumerate}
+% 		\item The empty set is vacuously open (since it has no elements), so $\emptyset \in \tT$. Further, $X \in \tT$ since for each $x \in X$, there must be at least one basis element $B$ containing $x$, which itself is contained in $X$. 
+% 	\end{enumerate}
+% 	\textcolor{red}{[[Incomplete]]}
+% \end{proof}
+
+% \begin{definition}[Subbasis]
+% 	A \navy{subbasis} $\sS$ for a topology on $X$ is a collection of subsets of $X$ whose union equals $X$. The topology generated by the subbasis $\sS$ is defined to be the collection $\tT$ of all unions of finite intersections of elements of $\sS$.
+% \end{definition}
+
+% \section{The Order Topology}
+
+% \begin{definition}[Order Topology]
+% 	Let $X$ be a set with a simple order relation, and assume $X$ has more than one element. Let $\bB$ be the collection of all sets of the following types:
+% 	\begin{enumerate}
+% 		\item All open intervals $(a,b)$ in $X$.
+% 		\item All intervals of the form $[a_0, b)$, where $a_0$ is the smallest element (if any) of $X$.
+% 		\item All intervals of the form $(a,b_0]$, where $b_0$ is the largest element (if any) of $X$. 
+% 	\end{enumerate}
+% 	The collection $\bB$ is a basis for a topology on $X$, which is called the \navy{order topology}.
+% \end{definition}
+
+% \begin{proof}[Proof that $\bB$ satisfies the requirements for a basis.] 
+% 	We check the two conditions required to be a basis:
+% 	\begin{enumerate}
+% 		\item Each element contained in a basis element: 
+% 		\item 
+% 	\end{enumerate}
+% \end{proof}
+
+
+
+% \section[The Product Topology]{The Product Topology on $X \times Y$}
+
+% \begin{definition}[Product Topology]
+% 	Let $X$ and $Y$ be topological spaces. The \navy{product topology} on $X \times Y$ is the topology having as basis the collection $\bB$ of all sets of the form $U \times V$, where $U$ is an open subset of $X$ and $V$ is an open subset of $Y$.
+% \end{definition}
+
+
+% \section{The Subspace Topology}
+
+% \section{Closed Sets and Limit Points}
+
+% \begin{definition}[Closed]
+% 	A subset $A$ of a topological space $X$ is said to be \navy{closed} if the set $X - A$ is open.
+% \end{definition}
+
+% \begin{definition}[Interior]
+% 	Given a subset $A$ of a topological space $X$, the \navy{interior} of $A$ is defined as the union of all open sets contained in $A$. Denoted by $\Int A$.
+% \end{definition}
+
+% \begin{definition}[Closure]
+% 	Given a subset $A$ of a topological space $X$, the \navy{closure} of $A$ is defined as the intersection of all closed sets containing $A$. Denoted by $\Cl A$ or $\bar{A}$.
+% \end{definition}
+
+% \begin{definition}[Limit Point]
+% 	If $A$ is a subset of the topological space $X$ and if $x$ is a point of $X$, we say that $x$ is a \navy{limit point} of $A$ is every neighborhood of $x$ intersects $A$ in some point other than $x$ itself. Equivalently, $x$ is a limit point of $A$ if it belongs to the closure of $A - \{x\}$. Note: The point $x$ may lie in $A$ or not.
+% \end{definition}
+
+% \begin{definition}[Hausdorff Space]
+% 	A topological space $X$ is called a \navy{Hausdorff space} if for each pair $x_1, x_2$ of distinct points of $X$, there exists neighborhoods $U_1$ and $U_2$ of $x_1$ and $x_2$ respectively that are disjoint. 
+% \end{definition}
+
+% \section{Continuous Functions}
+
+% \begin{definition}[Continuous]
+% 	Let $X$ and $Y$ be topological spaces. A function $f : X \to Y$ is said to be \navy{continuous} if for each open subset $V$ of $Y$, the set $f^{-1}(V)$ is an open subset of $X$.
+% \end{definition}
+
+% Notes:
+% \begin{itemize}
+% 	\item $f^{-1}(V)$ is the set of all points $x \in X$ for which $f(x) \in V$. It is empty if $V$ does not intersect the image set $f(X)$ of $f$.
+% \end{itemize}
+
+% \section{The Product Topology}
+
+% \section{The Metric Topology}
+
+% \begin{definition}[Metric, Distance]
+% 	A \navy{metric} on a set $X$ is a function
+% 	\begin{equation}
+% 		d : X \times X \to R
+% 	\end{equation}
+% 	having the following properties:
+% 	\begin{enumerate}
+% 		\item (Positive) $d(x,y) \geq 0$ for all $x,y \in X$. Equality holds if and only if $x=y$.
+% 		\item (Symmetric) $d(x,y) = d(y,x)$ for all $x,y \in X$.
+% 		\item (Triangle inequality) $d(x,y) + d(y,z) \geq d(x,z)$ for all $x,y,z \in X$.
+% 	\end{enumerate}
+% 	Given a metric $d$ on $X$, the number $d(x,y)$ is called the \navy{distance} between $x$ and $y$ in the metric $d$.
+% \end{definition}
+
+% \begin{definition}[$\e$-ball centered at $x$]
+% 	Given $\e > 0$, the set
+% 	\begin{equation}
+% 		B_d(x,\e) = \{y \ | \ d(x,y) < \e \}
+% 	\end{equation}
+% 	consists of all points $y$ whose distance from $x$ is less than $\e$. It is called the \navy{$\e$-ball centered at $x$}. 
+% \end{definition}
+
+% \begin{definition}[Metric Topology]
+% 	If $d$ is a metric on the set $X$, then the collection of all $\e$-balls $B_d(x,\e)$, where $x \in X$ and $\e > 0$, is a basis for a topology on $X$, called the \navy{metric topology} induced by $d$.
+% \end{definition}
+
+% \section{The Quotient Topology}
+
+% \section{Connected Spaces}
+
+% \begin{definition}[Separation, Connected]
+% 	Let $X$ be a topological space. A \navy{separation} of $X$ is a pair $U,V$ of disjoint nonempty open subsets of $X$ whose union is $X$. The space $X$ is said to be \navy{connected} if there does not exist a separation of $x.$ 
+% \end{definition}
+
+% \section{Connected Subspaces of the Real Line}
+
+% \begin{definition}[Path, Path Connected]
+% 	Given points $x$ and $y$ of the space $X$, a \navy{path} in $X$ from $x$ to $y$ is a continuous map $f:[a,b] \to X$ of some closed interval in the real line into $X$, such that $f(a) = x$ and $f(b) = y$. A space $X$ is said to be \navy{path connected} if every pair of points $X$ can be joined by a path in $X$.
+% \end{definition}
+
+% \section{Compact Spaces}
+
+% \begin{definition}[Cover(ing), Open Covering]
+% 	A collection $\aA$ of subsets of a space $X$ is said to cover $X$ or be a \navy{covering} of $X$, if the union of the elements of $\aA$ is equal to $X$. It is called an \navy{open covering} of $X$ if its elements are open subsets of $X$.
+% \end{definition}
+
+% \begin{definition}[Compact]
+% 	A space $X$ is said to be \navy{compact} if every open covering $\aA$ of $X$ contains a finite subcollection that also covers $X$.
+% \end{definition}
+
+
+
+% \section{Exercises in Munkres Topology}
+
+% \section{Basis for a Topology}
+
+% \begin{exercise}
+% 	Let $X$ be a topological space; let $A$ be a subset of $X$. Suppose that for each $x \in A$ there is an open set $U$ containing $x$ such that $U \subset A$. Show that $A$ is open in $X$.
+% \end{exercise}
+% \begin{solution}
+% 	We want to show that $A \in \tT$. For each $x \in A$ there is an open set $U_x$ containing $x$ such that $U_x \subset A$. We claim that $\bigcup_x U_x = A$. We show two inclusions. 
+% 	\begin{enumerate}
+% 		\item $\supset$: Let $y \in A$. There is an open set $U_y$ containing $y$, which is in the union. Thus $y \in \bigcup_x U_x$. 
+% 		\item $\subset$: Let $y \in \bigcup_x U_x$. Therefore there is some $x$ such that $y \in U_x$. Then $y \in A$ since $U_x \subset A$.
+% 	\end{enumerate}
+% 	Therefore $A$ is the union of open sets, so $A \in \tT$ is also an open set.
+% \end{solution}
+
+% \begin{exercise}
+% 	Consider the nine topologies on the set $X = \{a,b,c\}$ in the figure below. Compare them; that is, for each pair of topologies, determine whether they are comparable, and if so, which is finer.
+% 	\begin{figure}[H]
+% 	\begin{center}
+% 		\includegraphics[scale=.75]{top_ex.png}
+% 	\end{center}
+% \end{figure}
+% \end{exercise}
+% \begin{solution}
+% 	We'll label the examples by the coordinates $(i,j)$ where $i,j \in \{1,2,3\}$ correspond to the row/column number. Then, in the matrix below, we'll list which pair is finer, or ``inc'' if the pair is incomparable. 
+% 	\begin{center}
+% 	\begin{tabular}{ |c|c|c|c|c|c|c|c|c|c| } 	
+% 		\hline
+% 		& (1,1) & (1,2) & (1,3) & (2,1) & (2,2) & (2,3) & (3,1) & (3,2) & (3,3) \\	
+% 		\hline
+% 		(1,1) & = & (1,2) & (1,3) & (2,1) & (2,2) & (2,3) & (3,1) & (3,2) & (3,3) \\
+% 		\hline 
+% 		(1,2) & & = & inc & inc & inc & inc & (1,2) & (3,2) & (3,3) \\
+% 		\hline
+% 		(1,3) & & & = & (1,3) & inc & (2,3) & (1,3) & inc & (3,3) \\
+% 		\hline
+% 		(2,1) & & & & = & inc & (2,3) & inc & (3,2) & (3,3)\\
+% 		\hline
+% 		(2,2) & & & & & = & inc & inc & inc & (3,3) \\
+% 		\hline
+% 		(2,3) & & & & & & = & (2,3) & inc & (3,3) \\
+% 		\hline
+% 		(3,1) & & & & & & & = & (3,2) & (3,3) \\
+% 		\hline
+% 		(3,2) & & & & & & & & = & (3,3) \\
+% 		\hline
+% 		(3,3) & & & & & & & & & = \\ 
+% 		\hline
+% 	\end{tabular}
+% 	\end{center}
+% \end{solution}
+
+% \begin{exercise}
+% 	Show $\tT_c$ is a topology: Let $X$ be a set. Let $\tT_c$ be the collection of all subsets of $U$ of $X$ such that $X-U$ either is countable or is all of $X$. 
+% \end{exercise}
+% \begin{solution}
+% 	We check the three conditions:
+% 	\begin{enumerate}
+% 		\item $X - \emptyset = X$ is all of $X$, so $\emptyset \in \tT_c$. $X - X = \emptyset$, which is finite, so $X \in \tT_c$.
+% 		\item Let $\{U_\alpha\}$ be an indexed family of nonempty elements of $\tT_c$. Note that for each $\alpha$, $X - U_\alpha$ is countable. Then
+% 		\begin{equation}
+% 			X - \bigcup U_\alpha = \bigcap (X - U_\alpha)
+% 		\end{equation}
+% 		The intersection of countable sets is also countable, so $\{U_\alpha\} \in \tT_c$.
+% 		\item Let $\{U_i\}_{i=1}^n$ be nonempty elements of $\tT_c$. Then
+% 		\begin{equation}
+% 			X - \bigcap_{i=1}^n U_i = \bigcup_{i=1}^n (X - U_i)
+% 		\end{equation}
+% 		The finite union of countable sets is also finite, so that $\{U_i\}_{i=1}^n \in \tT_c$.
+% 	\end{enumerate}
+% \end{solution}
+
+% \begin{exercise}
+% 	Is the collection $\tT_\infty = \{U | X-U \text{ is infinite or empty or all of $X$ } \}$ a topology on $X$?
+% \end{exercise}
+% \begin{solution}
+% 	No. Counter example: 
+% \end{solution}
+
+\appendix
+
 \section{Set Theory Review}
 
 \begin{definition}[Difference]
@@ -362,276 +742,42 @@
 	\end{enumerate}
 \end{theorem}
 
-
-\section{Topological Spaces}
-
-\begin{definition}[Topology, Topological Space]
-	A \navy{topology} on a set $X$ is a collection $\tT$ of subsets of $X$ having the following properties:
-	\begin{enumerate}
-		\item $\emptyset$ and $X$ are in $\tT$.
-		\item The union of the elements of any subcollection of $\tT$ is in $\tT$.
-		\item The intersection of the elements of any finite subcollection of $\tT$ is in $\tT$.
-	\end{enumerate}
-	A set $X$ for which a topology $\tT$ has been specified is called a \navy{topological space}.
-\end{definition}
-
-\begin{definition}[Open set]
-	If $X$ is a topological space with topology $\tT$, we say that a subset $U$ of $X$ is an \navy{open set} of $X$ if $U$ belongs to the collection $\tT$.
-\end{definition}
-
-\begin{definition}[Discrete Topology, Trivial Topology]
-	If $X$ is any set, the collection of all subsets of $X$ is a topology on $X$, called the \navy{discrete topology}. The collection consisting of $X$ and $\emptyset$ is called the \navy{trivial topology}.
-\end{definition}
-
-\begin{example}[Finite Complement Topology]
-	Let $X$ be a set. Let $\tT_f$ be the collection of all subsets of $U$ of $X$ such that $X-U$ is either finite or all of $X$. This is topology. We check the three conditions.
-	\begin{enumerate}
-		\item $X \in \tT_f$ since $X - X$ is the empty set, and hence finite. $\emptyset \in \tT_f$ since $X - \emptyset = X$ is all of $X$.
-		\item Let $\{U_\alpha\}$ be an arbitrary of elements of $\tT_f$. Then
-		\begin{align*}
-			X - \bigcup U_\alpha &= X - \left(U_{\alpha_1} \cup \cdots \cup U_{\alpha_n}  \cdots \right) \\
-			&= (X - U_{\alpha_1}) \cap \cdots \cap (X - U_{\alpha_n}) \cdots \\
-			&= \bigcap (X - U_\alpha)
-		\end{align*}
-		Since each $U_\alpha \in \tT_f$, we know that each $X - U_\alpha$ is finite. The intersection of finite sets is finite, so $\{U_\alpha\} \in \tT_f$. 
-		\item Let $\{U_i\}$ be a finite collection of sets in $\tT_f$. Then
-		\begin{align*}
-			X - \bigcap U_i &= X - \left(U_1 \cap \cdots \cap U_n \right) \\
-			&= (X - U_1) \cup \cdots \cup (X - U_n) \\
-			&= \bigcup (X - U_i)
-		\end{align*}
-		This is a finite union of finite sets, which is also finite. 
-	\end{enumerate}
-\end{example}
-
-\begin{definition}[(Strictly) Finer, (Strictly) Coarser, Comparable]
-	Suppose $\tT$ and $\tT'$ are two topologies on a given set $X$. If $\tT' \supset \tT$, we say that $\tT'$ is \navy{finer} than $\tT$. If $\tT'$ properly contains $\tT$, we say that $\tT'$ is \navy{strictly finer} than $\tT$. For these respective situations, we say that $\tT$ is \navy{coarser} or \navy{strictly coarser} than $\tT'$. We say that $\tT$ is \navy{comparable} with $\tT'$ if either $\tT' \supset \tT$ or $\tT \supset \tT'$.
-\end{definition}
-
-
-\section{Basis for a Topology}
-
-\begin{definition}[Basis, Basis Elements, Topology $\tT$ generated by $\bB$]
-	If $X$ is a set, a \navy{basis} for a topology on $X$ is a collection $\bB$ of subsets of $X$ (called \navy{basis elements}) such that
-	\begin{enumerate}
-		\item For each $x \in X$, there is at least one basis element $B$ containing $x$.
-		\item If $x$ belongs to the intersection of two basis elements $B_1$ and $B_2$, then there is a basis element $B_3$ containing $x$ such that $B_3 \subset B_1 \cap B_2$.
-	\end{enumerate}
-	If $\bB$ satisfies these two conditions, then we define the \navy{topology $\tT$ generated by $\bB$} as follows: A subset $U$ of $X$ is said to be open in $X$ (that is, to be an element of $\tT$) if for each $x \in U$, there is a basis element $B \in \bB$ such that $x \in B$ and $B \subset U$. Note that each basis element is itself an element of $\tT$.
-\end{definition}
-
-\begin{theorem}[Collection $\tT$ generated by a basis $\bB$ is a topology on $X$]
-\end{theorem}
-\begin{proof}
-	We check the three conditions:
-	\begin{enumerate}
-		\item The empty set is vacuously open (since it has no elements), so $\emptyset \in \tT$. Further, $X \in \tT$ since for each $x \in X$, there must be at least one basis element $B$ containing $x$, which itself is contained in $X$. 
-	\end{enumerate}
-	\textcolor{red}{[[Incomplete]]}
-\end{proof}
-
-\begin{definition}[Subbasis]
-	A \navy{subbasis} $\sS$ for a topology on $X$ is a collection of subsets of $X$ whose union equals $X$. The topology generated by the subbasis $\sS$ is defined to be the collection $\tT$ of all unions of finite intersections of elements of $\sS$.
-\end{definition}
-
-\section{The Order Topology}
-
-\begin{definition}[Order Topology]
-	Let $X$ be a set with a simple order relation, and assume $X$ has more than one element. Let $\bB$ be the collection of all sets of the following types:
-	\begin{enumerate}
-		\item All open intervals $(a,b)$ in $X$.
-		\item All intervals of the form $[a_0, b)$, where $a_0$ is the smallest element (if any) of $X$.
-		\item All intervals of the form $(a,b_0]$, where $b_0$ is the largest element (if any) of $X$. 
-	\end{enumerate}
-	The collection $\bB$ is a basis for a topology on $X$, which is called the \navy{order topology}.
-\end{definition}
-
-\begin{proof}[Proof that $\bB$ satisfies the requirements for a basis.] 
-	We check the two conditions required to be a basis:
-	\begin{enumerate}
-		\item Each element contained in a basis element: 
-		\item 
-	\end{enumerate}
-\end{proof}
-
-
-
-\section[The Product Topology]{The Product Topology on $X \times Y$}
-
-\begin{definition}[Product Topology]
-	Let $X$ and $Y$ be topological spaces. The \navy{product topology} on $X \times Y$ is the topology having as basis the collection $\bB$ of all sets of the form $U \times V$, where $U$ is an open subset of $X$ and $V$ is an open subset of $Y$.
-\end{definition}
-
-
-\section{The Subspace Topology}
-
-\section{Closed Sets and Limit Points}
-
-\begin{definition}[Closed]
-	A subset $A$ of a topological space $X$ is said to be \navy{closed} if the set $X - A$ is open.
-\end{definition}
-
-\begin{definition}[Interior]
-	Given a subset $A$ of a topological space $X$, the \navy{interior} of $A$ is defined as the union of all open sets contained in $A$. Denoted by $\Int A$.
-\end{definition}
-
-\begin{definition}[Closure]
-	Given a subset $A$ of a topological space $X$, the \navy{closure} of $A$ is defined as the intersection of all closed sets containing $A$. Denoted by $\Cl A$ or $\bar{A}$.
-\end{definition}
-
-\begin{definition}[Limit Point]
-	If $A$ is a subset of the topological space $X$ and if $x$ is a point of $X$, we say that $x$ is a \navy{limit point} of $A$ is every neighborhood of $x$ intersects $A$ in some point other than $x$ itself. Equivalently, $x$ is a limit point of $A$ if it belongs to the closure of $A - \{x\}$. Note: The point $x$ may lie in $A$ or not.
-\end{definition}
-
-\begin{definition}[Hausdorff Space]
-	A topological space $X$ is called a \navy{Hausdorff space} if for each pair $x_1, x_2$ of distinct points of $X$, there exists neighborhoods $U_1$ and $U_2$ of $x_1$ and $x_2$ respectively that are disjoint. 
-\end{definition}
-
-\section{Continuous Functions}
-
-\begin{definition}[Continuous]
-	Let $X$ and $Y$ be topological spaces. A function $f : X \to Y$ is said to be \navy{continuous} if for each open subset $V$ of $Y$, the set $f^{-1}(V)$ is an open subset of $X$.
-\end{definition}
-
-Notes:
-\begin{itemize}
-	\item $f^{-1}(V)$ is the set of all points $x \in X$ for which $f(x) \in V$. It is empty if $V$ does not intersect the image set $f(X)$ of $f$.
-\end{itemize}
-
-\section{The Product Topology}
-
-\section{The Metric Topology}
-
-\begin{definition}[Metric, Distance]
-	A \navy{metric} on a set $X$ is a function
-	\begin{equation}
-		d : X \times X \to R
-	\end{equation}
-	having the following properties:
-	\begin{enumerate}
-		\item (Positive) $d(x,y) \geq 0$ for all $x,y \in X$. Equality holds if and only if $x=y$.
-		\item (Symmetric) $d(x,y) = d(y,x)$ for all $x,y \in X$.
-		\item (Triangle inequality) $d(x,y) + d(y,z) \geq d(x,z)$ for all $x,y,z \in X$.
-	\end{enumerate}
-	Given a metric $d$ on $X$, the number $d(x,y)$ is called the \navy{distance} between $x$ and $y$ in the metric $d$.
-\end{definition}
-
-\begin{definition}[$\e$-ball centered at $x$]
-	Given $\e > 0$, the set
-	\begin{equation}
-		B_d(x,\e) = \{y \ | \ d(x,y) < \e \}
-	\end{equation}
-	consists of all points $y$ whose distance from $x$ is less than $\e$. It is called the \navy{$\e$-ball centered at $x$}. 
-\end{definition}
-
-\begin{definition}[Metric Topology]
-	If $d$ is a metric on the set $X$, then the collection of all $\e$-balls $B_d(x,\e)$, where $x \in X$ and $\e > 0$, is a basis for a topology on $X$, called the \navy{metric topology} induced by $d$.
-\end{definition}
-
-\section{The Quotient Topology}
-
-\section{Connected Spaces}
-
-\begin{definition}[Separation, Connected]
-	Let $X$ be a topological space. A \navy{separation} of $X$ is a pair $U,V$ of disjoint nonempty open subsets of $X$ whose union is $X$. The space $X$ is said to be \navy{connected} if there does not exist a separation of $x.$ 
-\end{definition}
-
-\section{Connected Subspaces of the Real Line}
-
-\begin{definition}[Path, Path Connected]
-	Given points $x$ and $y$ of the space $X$, a \navy{path} in $X$ from $x$ to $y$ is a continuous map $f:[a,b] \to X$ of some closed interval in the real line into $X$, such that $f(a) = x$ and $f(b) = y$. A space $X$ is said to be \navy{path connected} if every pair of points $X$ can be joined by a path in $X$.
-\end{definition}
-
-\section{Compact Spaces}
-
-\begin{definition}[Cover(ing), Open Covering]
-	A collection $\aA$ of subsets of a space $X$ is said to cover $X$ or be a \navy{covering} of $X$, if the union of the elements of $\aA$ is equal to $X$. It is called an \navy{open covering} of $X$ if its elements are open subsets of $X$.
-\end{definition}
-
-\begin{definition}[Compact]
-	A space $X$ is said to be \navy{compact} if every open covering $\aA$ of $X$ contains a finite subcollection that also covers $X$.
-\end{definition}
-
-
-
-\section{Exercises in Munkres Topology}
-
-\section{Basis for a Topology}
+\subsection{Functions}
 
 \begin{exercise}
-	Let $X$ be a topological space; let $A$ be a subset of $X$. Suppose that for each $x \in A$ there is an open set $U$ containing $x$ such that $U \subset A$. Show that $A$ is open in $X$.
+ Let $f : A \to B$. Let $A_0 \subset A$ and $B_0 \subset B$. Then
+ \begin{enumerate}
+  	\item $A_0 \subset \inv{f}(f(A_0))$ and equality holds if $f$ is injective.
+  	\item $f(\inv{f}(B_0)) \subset B_0$ and equality holds if $f$ is surjective.
+  \end{enumerate} 
 \end{exercise}
-\begin{solution}
-	We want to show that $A \in \tT$. For each $x \in A$ there is an open set $U_x$ containing $x$ such that $U_x \subset A$. We claim that $\bigcup_x U_x = A$. We show two inclusions. 
+\begin{solution} We prove each item in turn:
+\begin{enumerate}
+	\item Let $a \in A_0$. Then $f(a) \in f(A_0)$. We have that $\inv{f}(f(A_0)) = \Set{a;f(a) \in f(A_0)}$. Then $f(a) \in \inv{f}(f(A_0))$, so that $A_0 \subset \inv{f}(f(A_0))$. We can actually show equality holds if and only if $f$ is injective. 
 	\begin{enumerate}
-		\item $\supset$: Let $y \in A$. There is an open set $U_y$ containing $y$, which is in the union. Thus $y \in \bigcup_x U_x$. 
-		\item $\subset$: Let $y \in \bigcup_x U_x$. Therefore there is some $x$ such that $y \in U_x$. Then $y \in A$ since $U_x \subset A$.
+		\item $\pmi$ Suppose $f$ is injective. Let $a \in \inv{f}(f(A_0))$. Then $f(a) \in f(A_0)$. Therefore there exists some $b \in f(A_0)$ such that $f(a) = f(b)$. Injectivity implies $a=b \in A_0$. 
+		\item $\imp$ We will prove the contrapositive. Suppose $f$ is \emph{not} injective. Then $f(a) = f(b)$ for some $a \neq b$. Therefore $\Set{a,b} \subset \inv{f}(f(\Set{a}))$. Thus $\inv{f}(f(\Set{a})) \not\subset \Set{a}$.
 	\end{enumerate}
-	Therefore $A$ is the union of open sets, so $A \in \tT$ is also an open set.
+	\item Let $x \in f(\inv{f}(B_0))$. Then there is some $b \in \inv{f}(B_0)$ such that $f(b) = x$. But $f(b) \in B_0$, so $x \in B_0$.
+	\begin{enumerate}
+		\item $\pmi$ Suppose $f$ is surjective. Take $b \in B_0$, then there exists some $a \in A_0$ such that $f(a) = b$, so that $a \in \inv{f}(B_0)$, and $b=f(a) \in f(\inv{f}(B_0))$. 
+	\end{enumerate}
+\end{enumerate}
 \end{solution}
 
 \begin{exercise}
-	Consider the nine topologies on the set $X = \{a,b,c\}$ in the figure below. Compare them; that is, for each pair of topologies, determine whether they are comparable, and if so, which is finer.
-	\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=.75]{top_ex.png}
-	\end{center}
-\end{figure}
-\end{exercise}
-\begin{solution}
-	We'll label the examples by the coordinates $(i,j)$ where $i,j \in \{1,2,3\}$ correspond to the row/column number. Then, in the matrix below, we'll list which pair is finer, or ``inc'' if the pair is incomparable. 
-	\begin{center}
-	\begin{tabular}{ |c|c|c|c|c|c|c|c|c|c| } 	
-		\hline
-		& (1,1) & (1,2) & (1,3) & (2,1) & (2,2) & (2,3) & (3,1) & (3,2) & (3,3) \\	
-		\hline
-		(1,1) & = & (1,2) & (1,3) & (2,1) & (2,2) & (2,3) & (3,1) & (3,2) & (3,3) \\
-		\hline 
-		(1,2) & & = & inc & inc & inc & inc & (1,2) & (3,2) & (3,3) \\
-		\hline
-		(1,3) & & & = & (1,3) & inc & (2,3) & (1,3) & inc & (3,3) \\
-		\hline
-		(2,1) & & & & = & inc & (2,3) & inc & (3,2) & (3,3)\\
-		\hline
-		(2,2) & & & & & = & inc & inc & inc & (3,3) \\
-		\hline
-		(2,3) & & & & & & = & (2,3) & inc & (3,3) \\
-		\hline
-		(3,1) & & & & & & & = & (3,2) & (3,3) \\
-		\hline
-		(3,2) & & & & & & & & = & (3,3) \\
-		\hline
-		(3,3) & & & & & & & & & = \\ 
-		\hline
-	\end{tabular}
-	\end{center}
-\end{solution}
 
-\begin{exercise}
-	Show $\tT_c$ is a topology: Let $X$ be a set. Let $\tT_c$ be the collection of all subsets of $U$ of $X$ such that $X-U$ either is countable or is all of $X$. 
 \end{exercise}
 \begin{solution}
-	We check the three conditions:
+\begin{enumerate}
+	\item Let $B_0 \subset B_1$. Fix $x \in \inv{f}(B_0)$. Then $f(x) \in B_0$, which implies $f(x) \in B_1$. Thus $\inv{f}(B_0) \ss \inv{f}(B_1)$. 
+	\item We show two inclusions:
 	\begin{enumerate}
-		\item $X - \emptyset = X$ is all of $X$, so $\emptyset \in \tT_c$. $X - X = \emptyset$, which is finite, so $X \in \tT_c$.
-		\item Let $\{U_\alpha\}$ be an indexed family of nonempty elements of $\tT_c$. Note that for each $\alpha$, $X - U_\alpha$ is countable. Then
-		\begin{equation}
-			X - \bigcup U_\alpha = \bigcap (X - U_\alpha)
-		\end{equation}
-		The intersection of countable sets is also countable, so $\{U_\alpha\} \in \tT_c$.
-		\item Let $\{U_i\}_{i=1}^n$ be nonempty elements of $\tT_c$. Then
-		\begin{equation}
-			X - \bigcap_{i=1}^n U_i = \bigcup_{i=1}^n (X - U_i)
-		\end{equation}
-		The finite union of countable sets is also finite, so that $\{U_i\}_{i=1}^n \in \tT_c$.
-	\end{enumerate}
-\end{solution}
-
-\begin{exercise}
-	Is the collection $\tT_\infty = \{U | X-U \text{ is infinite or empty or all of $X$ } \}$ a topology on $X$?
-\end{exercise}
-\begin{solution}
-	No. Counter example: 
+	 	\item $\supset$: We can use $(i)$, since $B_i \subset B_0 \cup B_1$, so $\inv{f}(B_0) \ss \inv{f}(B_0 \cup B_1)$ and $\inv{f}(B_1) \ss \inv{f}(B_0 \cup B_1)$, so $\inv{f}(B_0) \cup \inv{f}(B_1) \ss \inv{f}(B_0 \cup B_1)$.
+	 	\item $\ss:$ Let $x \in \inv{f}(B_0 \cup B_1)$. Thus there exists some $b \in B_0 \cup B_1$ such that $f(x) = b$. Therefore $x \in \inv{f}(B_0)$ or $x \in \inv{f}(B_1)$, so that $\inv{f}(B_0 \cup B_1) \ss \inv{f}(B_1)$.
+	 \end{enumerate}
+	 \item  
+\end{enumerate}
 \end{solution}
 
 
