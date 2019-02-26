@@ -266,7 +266,6 @@
 \newcommand{\ZZZ}{\mathsf Z}
 
 \newcommand{\aA}{\mathscr A}
-\newcommand{\cC}{\mathscr C}
 \newcommand{\iI}{\mathscr I}
 \newcommand{\eE}{\mathscr E}
 \newcommand{\fF}{\mathscr F}
@@ -278,7 +277,6 @@
 \newcommand{\pP}{\mathcal P}
 \newcommand{\aAA}{\mathcal A}
 \newcommand{\vV}{\mathcal V}
-\newcommand{\dD}{\mathcal D}
 \newcommand{\mM}{\mathcal M}
 \newcommand{\oO}{\mathcal O}
 \newcommand{\gG}{\mathcal G}
@@ -286,6 +284,10 @@
 \newcommand{\tT}{\mathcal T}
 \newcommand{\bB}{\mathcal B}
 \newcommand{\zZ}{\mathcal Z}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\dD}{\mathcal D}
+\newcommand{\wW}{\mathcal W}
+\newcommand{\uU}{\mathcal U}
 
 % Common collections
 \def\cA{\col{A}}
@@ -654,7 +656,192 @@ The following are examples of topologies/topological spaces:
 \end{definition}
 
 
+\section{Sequences}
 
+\begin{definition}[Converges]
+	Fix a topological space $(X,\tT)$. A sequence of points $(a_i)_{i \in \NN} \ss X$ \navy{converges} to $b \in X$ if for every open set $W$ containing $b$, all but finitely many of the terms of the sequence are in $W$. In symbols
+	\begin{equation*}
+		(a_i)_{i \in \NN} \to b \iff \forall W\in \tT \text{ s.t. } b \in W, \exists N \in \NN \text{ s.t. } \forall m > n, a_m \in W
+	\end{equation*}
+	
+\end{definition}
+
+\begin{definition}[Sequentially closed]
+	A set $S \ss X$ is \navy{sequentially closed} if for every sequence $(a_i)_{i \in \NN}$ of points in $S$ converging to some $b \in X$, we have $b \in S$. 
+\end{definition}
+
+\textbf{How do sequentially closed and closed sets relate?}
+\begin{itemize}
+	\item In a metric space, a set is closed if and only if it is sequentially closed.
+	\item In general topological spaces, this need not be true.
+\end{itemize}
+
+\textbf{How bad can convergence be in an arbitrary topological space? Pretty bad.}
+
+\begin{example}[Every sequence converges to every point]
+	Let $X$ be a set with at least 2 points and $\tT$ be the indiscrete (or trivial) topology (note: $|X| = 1$ isn't that interesting since every sequence in $X$ would then be constant and hence convergent). Let $(a_i)_{i \in \NN}$ be a sequence of points in $X$ and fix a point $b \in X$.
+
+	\begin{claim}[]
+		$(a_i)_{i \in \NN} \to b$ 
+	\end{claim}
+	\begin{proof}
+		Let $U \ss X$ such that $b \in U$ and $U \in \tT$. Since $b \in U$, we have that $U \neq \emptyset$, so that the only possibility is that $U = X$ (since $\tT = \Set{\emptyset,X}$). But then $U$ contains all elements of the sequence  $(a_i)_{i \in \NN}$. Thus $(a_i)_{i \in \NN}$ converges to $b$. Since $b$ was arbitrary, $(a_i)_{i \in \NN}$ converges to every point of $X$.
+	\end{proof}
+	
+\end{example}
+
+\begin{example}[Every sequence converges to exactly one point or doesn't converge, or converges to everything]
+	Let $(X,\tT)$ be the cofinite topology (on an infinite set $X$). For simplicity, let $X = \NN$. Let $(a_i)_{i \in \NN}$ be a sequence of points in $X$. We can divide the possible forms of $(a_i)_{i \in \NN}$ into 3 cases:
+	\begin{enumerate}
+		\item No infinite repetition of any terms (ex. $(1,2,3,4,\ldots)$).
+		\item Exactly one value gets repeated infinitely often (ex. $(1,2,1,3,1,4,1,\ldots)$).
+		\item At least $2$ values get repeated infinitely often.
+	\end{enumerate}
+	We will show that the respective outcomes for these cases are
+	\begin{enumerate}
+		\item Converges to every point.
+		\item Converges to point repeated infinitely often.
+		\item Doesn't converge.
+	\end{enumerate}
+
+	\begin{claim}[]
+		A sequence with no infinite repetition converges to every point.
+	\end{claim}
+	\begin{proof}
+		 Let $a=(a_i)_{i \in \NN}$ be a sequence in $X$ with no infinite repetition and let $b \in X$. Let $b \in U$ where $U \in \tT$ ($U$ open). Note that $U \neq \emptyset$. Thus $U$ is cofinite (that is, $X-U$ is finite, so that finitely many points of $X$ are \emph{not} in $U$). Therefore each point not in $U$ only appears finitely many times in the sequence (since there is no infinite repetition in $a$). Therefore only finitely many of the terms of $a$ are not in $U$ (finite $\times$ finite = finite). Therefore the sequence converges to $b$. 
+	\end{proof}
+	
+	
+\end{example}
+
+
+
+\begin{claim}[Metric space: closed $\iff$ sequentially closed]
+	In a metric space, a set is closed if and only if it is sequentially closed. More formally: If $(X,d)$ is a metric space and $\tT_d$ is the induced topology on $X$, then $S \ss X$ is sequentially closed if and only if $S$ is closed (with respect to $\tT$, that is $X-S \in \tT$). 
+\end{claim}
+\begin{proof}[Closed $\imp$ sequentially closed]
+	Suppose (for contradiction) that $A \ss X$, $A$ closed, but $A$ not sequentially closed. Since $A$ is not sequentially closed, there is a sequence of points  $(a_i)_{i \in \NN}$ from $A$ and a point $b \in X - A$ such that $(a_i)_{i \in \NN} \to b$.  
+
+	$A$ closed means $X- A$ is open. So since $b \in X-A$, there is some $U \in \tT_d$ with $b \in U$ such that $U \cap A = \emptyset$. Of course, $U = X - A$ works. But, we can find a basic open (i.e., a set in the basis we're using, here the set of open balls). Since $b \in X-A$ and $X-A$ open, there exists $\e> 0$ such that $B_\e(b) \ss X-A$. Thus we have that
+	\begin{enumerate}
+		\item $B_\e(b)$ is open.
+		\item $b \in B_\e(b)$.
+		\item $B_\e(b)$ contains none of the terms of  $(a_i)_{i \in \NN}$ (since $a_i \in A$ for all $i$). 
+	\end{enumerate}
+	But then  $(a_i)_{i \in \NN} \not\to b$, a contradiction.
+\end{proof}
+
+\section{Product Topology}
+\begin{definition}[Product topology, two sets]
+	Let $(X,\t)$ and $(Y,\sigma)$ be topological spaces. The \navy{product topology} on $X \times Y$ is the topology having as \emph{basis} the collection $\bB$ of all set of the form $U \times V$ where $U$ is an open subset of $X$ and $V$ is an open subset of $Y$. In symbols,
+	\begin{equation}
+		\bB_{\t \times \sigma} = \Set{U \times V; U \in \t, V \in \sigma}
+	\end{equation}
+\end{definition}
+
+\begin{remark}
+	Note, open sets of $X \times Y$ need not be of the form open set in X $\times$ open set in $Y$. 
+\end{remark}
+
+\begin{proof}[Proof that $\bB_{\t \times \sigma}$ is indeed a basis for a topology on $X \times Y$]
+	We check the two conditions required to be a basis:
+	\begin{enumerate}
+		\item $\bB$ ``covers'' $X$: Note that $X \in \t$ and $Y \in \sigma$ (since they are each topologies). Therefore $X \times Y \in \bB$. Thus for any $(x,y) \in X \times Y$, we have that $(x,y) \in X \times Y \in \bB$.
+		\item Intersection Property: Take two basis elements $U_1 \times V_1$ and $U_2 \times V_2$. Notice that
+		\begin{equation}
+			(U_1 \times V_1) \cap (U_2 \times V_2) = (U_1 \cap U_2) \times (V_1 \cap V_2)
+		\end{equation}
+		But then $U_1 \cap U_2 \in \t$ and $V_1 \times V_2 \in \sigma$, so that $(U_1 \times V_1) \cap (U_2 \times V_2)  \in\bB$, so the intersection of two basis elements is again a basis element. This is stronger than the property required to be a basis, yet of course sufficient.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[Product space/topology for finitely many spaces]
+	Let $(X_1,\t_1), \ldots, (X_n,\t_n)$ be topological spaces. The set of points of the \navy{product space} is $X_1 \times \cdots \times X_n$. The basis for the \navy{product topology} is
+	\begin{equation}
+		\bB_{\t_1 \times \cdots \times \t_n} = \Set{W_1 \times \cdots \times W_n; W_i \in \t_i}
+	\end{equation}
+\end{definition}
+
+\begin{remark}
+	Again, $\bB_{\t_1 \times \cdots \times \t_n}$ is indeed a basis since the first condition is trivially satisfied ($X_1 \times \cdots \times X_n$ is a basis element) and the intersection of products is a product of intersections, and hence again a basis element.
+\end{remark}
+
+\begin{definition}[Projection Maps]
+	Let $(X_1,\t_1)$ and $(X_2,\t_2)$ be topological spaces. Let
+	\begin{align*}
+		&\pi_1:X_1 \times X_2 \to X_1 : (x_1,x_2) \mapsto x_1 \\
+		&\pi_2:X_1 \times X_2 \to X_2 : (x_1,x_2) \mapsto x_2
+	\end{align*}
+	then $\pi_1$ and $\pi_2$ are \navy{projection maps}. 
+\end{definition}
+
+\begin{claim}[]
+	Let $\pi_1$ be $\pi_2$ projection maps (as above). Then
+	\begin{enumerate}
+		\item $\pi_1$ is continuous with respect to $\t_1 \otimes \t_2$ and $\t_1$.
+		\item $\pi_2$ is continuous with respect to $\t_1 \otimes \t_2$ and $\t_2$.
+	\end{enumerate}
+\end{claim}
+\begin{proof}
+	We show $\pi_1$ is continuous. Suppose $S \ss X_1$ is open (i.e., $\in \t_1$). We want to show that $\pi^{-1}(S) \in \t_1 \otimes \t_2$. We have that
+	\begin{align*}
+		\pi_1^{-1}(S) &= \Set{p \in X_1 \times X_2; \pi_1(p) \in S} \\
+		&= \Set{(x_1, x_2) \in X_1 \times X_2; \pi_1((x_1,x_2)) \in S} \\
+		&= \Set{(x_1, x_2) \in X_1 \times X_2; x_1 \in S} \\
+		&= S \times X_2
+	\end{align*}
+	Thus we have that
+	\begin{itemize}
+		\item $S$ is $\t_1$-open.
+		\item $X_2$ is $\t_2$-open.
+	\end{itemize}
+	so that $S \times X_2$ is in our basis for $\t_1 \otimes \t_2$. Thus, $S \times X_2 \in \t_1 \otimes \t_2$.
+	
+\end{proof}
+
+
+\section{Compactness}
+
+\begin{definition}[Open cover]
+	An \navy{open cover} of $(X,\t)$ is a family of $\t$-open sets $\cC \ss \t$ such that $\bigcup \cC = X$. 
+\end{definition}
+
+\begin{remark}
+	The notation $\bigcup \cC = X$ means $X$ is the union of ``stuff'' in $\cC$. 
+\end{remark}
+
+\begin{example}[Open covers]
+	The following are examples of open covers of $(X,\t)$:
+	\begin{enumerate}
+		\item Any basis for $\t$ is an open cover of $(X,\t)$. 
+		\item Any subbasis for $\t$ is an open cover of $(X,\t)$.
+		\item $\{X\}$.
+		\item $\t$.
+		\item Let $X = \RR$ and $\t = \t_e$. Then $\Set{(-n,n); n \in \NN}$ is an open cover of $X$.  
+	\end{enumerate}
+\end{example}
+
+\begin{definition}[Subcover]
+	$\dD$ is a \navy{subcover} of $\cC$ if
+	\begin{enumerate}
+		\item $\dD \ss \cC$.
+		\item $\dD$ is an open cover.  
+	\end{enumerate}
+	A \navy{finite subcover} is a subcover which is finite.
+\end{definition}
+
+
+\begin{definition}[Compact]
+	A topological space $(X,\t)$ is \navy{compact} if every open cover has a finite subcover. 
+\end{definition}
+
+\begin{example}[Non-compact Set]
+	Consider the topological space $(\RR,\t_e)$. This space has a finite subcover: $\{\RR\}$. But does this imply that $(\RR,\t_e)$ is compact? No! We need to see if \emph{all} open covers have finite subcovers. Consider the open cover
+	\begin{equation}
+		\cC = \Set{(-n,n); n \in \NN}
+	\end{equation}
+	$\cC$ has no finite subcover. Thus $(\RR,\t_e)$ is not compact. 
+\end{example}
 
 
 % \section{The Order Topology}
