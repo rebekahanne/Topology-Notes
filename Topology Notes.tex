@@ -555,7 +555,7 @@ The following are examples of topologies/topological spaces:
 \section{Continuous Functions}
 
 \begin{definition}[Closed]
-	A subset $A$ of a topological space $(X,\tT)$ is said to be \navy{closed} if the set $X - A \in \tT$. In words, a subset of a topological space is open if its complement (in the space) is open. 
+	A subset $A$ of a topological space $(X,\tT)$ is said to be \navy{closed} if the set $X - A \in \tT$. In words, a subset of a topological space is closed if its complement (in the space) is open. 
 \end{definition}
 
 \begin{example}[Sets can be both closed and open]
@@ -588,13 +588,18 @@ The following are examples of topologies/topological spaces:
 \end{remark}
 
 \begin{example}[Continuous functions]
-	Let $X$ be a set with more than one element. Let $\tT_{disc} = \pP(X)$ and $\tT_{ind} = \Set{\emptyset, X}$ (that is, the discrete and indiscrete topologies. We require $X$ to have more than one element, else these topologies would be the same). Let $f = id$. Then
+	Let $X$ be a set with more than one element. Let $\tT_{disc} = \pP(X)$ and $\tT_{ind} = \Set{\emptyset, X}$ (that is, the discrete and indiscrete topologies. We require $X$ to have more than one element, else these topologies would be the same). Let $f = id$ (that is $f(x) = x$). Then
 	\begin{enumerate}
 		\item $f: (X,\tT_{disc}) \to (X,\tT_{ind})$ is \textbf{continuous}. Indeed, if $S \sse X$, $S\in \tT_{ind}$, then $f^{-1}(S) \in \tT_{disc}$, since $\tT_{disc} \supset \tT_{ind}$. 
 
 		\item $f: (X,\tT_{ind}) \to (X,\tT_{disc})$ is \textbf{not continuous}. For example, suppose $X = \Set{1,2}$. Let $S = \Set{1} \in \tT_{disc}$. Then $\inv{f}(\Set{1}) = \Set{1} \not \in \tT_{ind}$. 
 	\end{enumerate}
 \end{example}
+
+\begin{remark}
+	This example motivates a more general claim: Any map into the indiscrete topology or out of the discrete topology is continuous. Further, the identity map from a finer topology to a coarser topology is continuous. 
+\end{remark}
+
 
 \begin{example}[Open, closed, continuous functions]
 	\begin{definition}[Open map]
@@ -605,7 +610,9 @@ The following are examples of topologies/topological spaces:
 		$f: (X,\tT) \to (Y,\sigma)$ is a \navy{closed map} if $\forall S \ss X$ such that $X - S \in \tT$ we have that $Y - f(S) \in \sigma$. In words: closed sets map to closed sets. 
 	\end{definition}
 	
-	Continuous, open, and closed maps don't have clean relationships: Let $X = \Set{1,2}$.
+	\textbf{Continuous, open, and closed maps don't have clean relationships.} 
+
+	To see this, let $X = \Set{1,2}$.
 	\begin{enumerate}
 		\item Continuous, not open, not closed map: Let $f : (X,\pP(X)) \to (X,\Set{\emptyset,X})$ be the identity map (discrete to indiscrete). 
 		\begin{enumerate}
@@ -619,34 +626,97 @@ The following are examples of topologies/topological spaces:
 		 	\item Open: Since $\tT_{ind} \ss \tT_{disc}$ 
 		 	\item Closed: Since $\tT_{ind} \ss \tT_{disc}$.
 		 \end{enumerate} 
-		 \item Continuous, closed, not open: 
-
+		 \item Continuous, closed, not open: Let $X = \RR$ and $\t = \t_e$. Let $Y = \RR^2$ and $\t = \t_{e_2}$ (basis is set of open balls). Define $f: X\to Y: r \mapsto (r,0)$. 
+		 \begin{enumerate}
+		 	\item Continuous: Clear. 
+		 	\item Not open: $\RR$ is sent to the x-axis, which is not open in the plane. 
+		 	\item Closed: Fix $A \ss \RR$ closed (in $\t_e$-sense). We need to show that $f(A) = \Set{f(a); a \in A}$ is closed (in $\t_{e_2}$ sense). Thus we must show $\RR^2 - f(A)$ is open, which is equivalent to showing that for all $b \in \RR^2$, there exists an $\e > 0$ such that $B_\e(b) \ss \RR^2 - f(A)$. We prove by cases:
+		 	\begin{enumerate}
+		 	 	\item $b$ not on x-axis: Let $\e = $ distance from $b$ to x-axis. Thus $B_\e(b) \cap (\text{x-axis}) = \emptyset$, and $f(A) \ss (\text{x-axis})$. Thus $B_\e(A) \cap f(A) = \emptyset$, and $B_\e(b) \ss \RR^2 - f(A)$. 
+		 	 	\item $b$ is on x-axis: Look at $a = f^{-1}(b)$ (note: $a$ exists and is unique. $f$ is injective and  hits all of $x$-axis. Thus $b \not\in f(A) \imp a \not\in A $). Since $A$ is closed in $\RR$, if $a \not\in A$, then $\exists \e > 0$ such that $(a-\e,a+\e) \sse \RR - A$. Then 
+		 	 	\begin{claim}
+		 	 		$B_\e(b) \ss \RR^2 - f(A)$
+		 	 	\end{claim}
+		 	 	\begin{proof}
+		 	 		$B_\e(b) \cap (\text{x-axis}) = f((a-\e,a+\e))$. But $f((a-\e,a+\e)) \cap f(A) = \emptyset$, since $(a-\e,a+\e) \cap A = \emptyset$. Thus
+		 	 		\begin{align*}
+		 	 			B_\e(b) \cap f(A) &= B_\e(b) \cap f(A) \cap (\text{x-axis}) \\
+		 	 			&= f((a-\e,a+\e)) \cap f(A) \\
+		 	 			&= \emptyset
+		 	 		\end{align*}
+		 	 		
+		 	 	\end{proof}
+		 	 	
+		 	 \end{enumerate} 
+		 \end{enumerate}
 	\end{enumerate}
 \end{example}
 
 \section{Subspace Topology}
 
 \begin{definition}[Subspace topology]
-	Given a topological space $(X,\tT)$ and a non-empty set $A \sse X$, the \navy{subspace topology on $A$ induced (or given) by $\tT$} is $(A, \tT_A)$ where $\tT_A = \Set{U \cap A; U \in \tT}$. 
+	Given a topological space $(X,\tT)$ and a non-empty set $A \sse X$, the \navy{subspace topology on $A$ induced (or given) by $\tT$} is $(A, \t_A)$ where $\tT_A = \Set{U \cap A; U \in \tT}$. 
 \end{definition}
 
-\begin{proof}[Proof that $(A, \tT_A)$ is a topological space]
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=.4]{subspace_topology.png}
+	\end{center}
+\end{figure}
+
+\begin{remark}
+	Intuitively, $U \cap A$ ``should'' be open in the sense of $A$, since it's the ``all of the open set $U$'' as far as $A$ knows. 
+\end{remark}
+
+
+\begin{proof}[Proof that $(A, \t_A)$ is a topological space]
 	We check the axioms:
 	\begin{enumerate}
 		\item $\emptyset \in \tT_A$: $\emptyset \in \tT$, and $\emptyset \cap A = \emptyset$, so $\emptyset \in \tT_A$. 
 		\item $A \in \tT_A$: $X \in \tT$, and $X \cap A = A$, so $A \in \tT_A$.  
-		\item Closure under finite intersections: 
+		\item Closure under finite intersections [$2$ for simplicity]: Suppose $B_1, B_2 \in \t_A$. We want to show that $B_1 \cap B_2 \in \t_A$. We know that there exist $C_1, C_2 \in \tT$ such that $B_1 = C_1 \cap A$ and $B_2 = C_2 \cap A$. Then
+		\begin{equation}
+			B_1 \cap B_2 = (C_1 \cap A) \cap (C_2 \cap A) = (C_1 \cap C_2) \cap A
+		\end{equation}
+		But $C_1 \cap C_2 \in \tT$ since $\tT$ is a topology, therefore $B_1 \cap B_2$ can be written as the intersection of a set in $\tT$ and $A$, so that $B_1 \cap B_2 \in \t_A$. 
 	\end{enumerate}
 \end{proof}
+
+\subsection{Connectedness}
+
+\begin{definition}[Connected]
+	A space $(X,\t)$ is \navy{connected} if whenever sets $V,W$ are
+	\begin{enumerate}
+		\item Nonempty
+		\item Open
+		\item $V \cup W = X$
+	\end{enumerate}
+	we have $V \cap W \neq \emptyset$. 
+\end{definition}
+
+\begin{remark}
+	Equivalently, a set is connected if and only the only clopen sets are $\emptyset, X$. 
+\end{remark}
+
+\begin{example}[Connected Set]
+	Let $(X,\t) = (\RR,\t_e)$ and $A = (0,1) \cup (1,2)$. Notice that
+	\begin{enumerate}
+		\item $(0,1) \in \t_A$ since $(0,1) = (0,1) \cap A$ and $(0,1) \in \t_e)$. 
+		\item Similarly, $(1,2) \in \t_A$. 
+	\end{enumerate}
+	Then notice that $(0,1) = A - (1,2)$, so that the complements of both $(0,1)$ and $(1,2)$ are both open. Therefore each set is clopen. Thus $A$ is not connected. 
+\end{example}
+
+
 
 \section{Metric Spaces}
 
 \begin{definition}[Metric space]
 	A \navy{metric space} is a nonempty set $X$ together with a binary function $d : X\times X \to \RR$ which satisfies the following properties: For all $x,y,z \in X$ we have that
 	\begin{enumerate}
-		\item $d(x,y) \geq 0$
-		\item $d(x,y) = 0$ if and only if $x=y$
-		\item $d(x,y) = d(y,x)$
+		\item Positivity: $d(x,y) \geq 0$
+		\item Definiteness: $d(x,y) = 0$ if and only if $x=y$
+		\item Symmetry: $d(x,y) = d(y,x)$
 		\item Triangle inequality: $d(x,y) + d(y,z) \geq d(x,z)$
 	\end{enumerate}
 \end{definition}
@@ -654,6 +724,35 @@ The following are examples of topologies/topological spaces:
 \begin{definition}[Metric topology]
 	Given a metric space $(X,d)$, the set $\bB = \Set{B_\e(x); \e > 0, x \in X}$ is a basis for a topology on $X$ (where $B_\e(x) = \Set{y \in X; d(x,y) < \e}$) called the \navy{metric topology}.
 \end{definition}
+
+\begin{theorem}[``Continuous'' $=$ ``Continuous'']
+	If $(X_1,d_1)$ and $(X_2,d_2)$ are metric spaces with induced topologies $\t_{d_1}$ and $\t_{d_2}$, then for $f: X_1 \to X_2$, the following are equivalent:
+	\begin{enumerate}
+		\item $f$ is continuous with respect to $\t_{d_1}$ and $\t_{d_2}$.
+		\item For all $a \in X_1$ and $\e > 0$, there exists a $\d > 0$ such that for all $b \in X_1$ for which $d_1(a,b) < \d$, we have that $d_2(f(a),f(b)) < \e$. 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
+\subsection{Special Properties and Maps}
+
+\begin{definition}[$T_2$, Hausdorff]
+	$(X,\t)$ is \navy{$T_2$ (Hausdorff)} if for every distinct $a,b \in X$, there exist open sets $V,W \in \t$ such that $a \in V$, $b \in W$, and $V \cap W = \emptyset$.
+\end{definition}
+
+\begin{theorem}[Separation Axiom]
+	Metric spaces are always $T_2$. 
+\end{theorem}
+\begin{proof}
+	Let $\e = \frac{d(a,b)}{2}$. Then let $V=B_\e(a)$ and $W = B_\e (b)$.
+\end{proof}
+
+\begin{remark}
+	Not all topological spaces are $T_2$.
+\end{remark}
+
 
 
 \section{Sequences}
@@ -798,6 +897,14 @@ The following are examples of topologies/topological spaces:
 	so that $S \times X_2$ is in our basis for $\t_1 \otimes \t_2$. Thus, $S \times X_2 \in \t_1 \otimes \t_2$.
 	
 \end{proof}
+
+
+\begin{example}[Projection Maps]
+	Take $(X_1,\t_1) = (X_2,\t_2) = (\RR, \t_e)$. Take $S \ss \RR^2$ to be the unit ball: $S = \Set{(x,y);x^2 + y^2 <1}$. Observe that
+	\begin{equation}
+		\pi_1(S) = \pi_2(S) = (-1,1)
+	\end{equation}
+\end{example}
 
 
 \section{Compactness}
