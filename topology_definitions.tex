@@ -2,7 +2,7 @@
 %% This is file, `topology_definitions.tex',
 %% generated with the extract package.
 %% 
-%% Generated on :  2019/03/15,2:25
+%% Generated on :  2019/03/21,11:34
 %% From source  :  "Topology Notes".tex
 %% Using options:  active,generate=topology_definitions,extract-env={definition,algorithm}
 %% 
@@ -576,6 +576,17 @@ and $\UU$ satisfies the additional ``ultra'' condition:
 \begin{enumerate}
 \item[(iv)] $\forall A \sse I$, $A \in \UU$ or $I - A \in \UU$ (but not both, by (i) and (iii))
 \end{enumerate}
+\end{definition}
+
+\begin{definition}[Principal ultrafilter]
+\navy{Principal ultrafilters} take the form
+\begin{equation}
+\angles{a} = \Set{A \sse I: a \in A} \qquad \text{ for some } a \in I
+\end{equation}
+\end{definition}
+
+\begin{definition}[Finite intersection property (FIP)]
+A collection of subsets $\fF$ of $I$ has \navy{FIP} if whenever $A_1,\ldots,A_n \in \fF$ we have $\bigcap_{i=1}^n A_i \neq \emptyset$.
 \end{definition}
 
 \begin{definition}[Difference]
