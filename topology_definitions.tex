@@ -2,7 +2,7 @@
 %% This is file, `topology_definitions.tex',
 %% generated with the extract package.
 %% 
-%% Generated on :  2019/03/21,11:34
+%% Generated on :  2019/03/28,11:38
 %% From source  :  "Topology Notes".tex
 %% Using options:  active,generate=topology_definitions,extract-env={definition,algorithm}
 %% 
@@ -82,6 +82,9 @@
 \newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
 \newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
+% Framed theorems
+\usepackage[framemethod=TikZ]{mdframed}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Document Settings
@@ -111,14 +114,75 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+
+\newenvironment{theo}[2][]{%
+    \refstepcounter{theo}
+
+\ifstrempty{#1}%
+% if condition (without title)
+{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=blue!20]
+        {\strut Theorem~\thetheo};}
+    }%
+% else condition (with title)
+}{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=blue!20]
+        {\strut Theorem~\thetheo:~#1};}%
+    }%
+}%
+% Both conditions
+\mdfsetup{%
+    innertopmargin=10pt,linecolor=blue!20,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+}
+
+\begin{mdframed}[]\relax}{%
+\end{mdframed}}
+
+\newcounter{prf}[section]\setcounter{prf}{0}
+\renewcommand{\theprf}{\arabic{section}.\arabic{prf}}
+\newenvironment{prf}[2][]{%
+\refstepcounter{prf}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=red!20]
+{\strut Proof~\theprf};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=red!20]
+{\strut Proof~\thetheo:~#1};}}%
+}%
+\mdfsetup{innertopmargin=10pt,linecolor=red!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\qed\end{mdframed}}
+
 % Environments
 
-\theoremstyle{plain}
-\newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
+\theoremstyle{definition}
+\newmdtheoremenv{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
+% \newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
 \newtheorem{claim}{\color{ForestGreen}{\textbf{Claim}}}[section]
-\newtheorem{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
-\newtheorem{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
-\newtheorem{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+% \newtheorem{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
+% \newtheorem{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
+% \newtheorem{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+\newmdtheoremenv{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
+\newmdtheoremenv{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
+\newmdtheoremenv{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+
 \newtheorem{axiom}[theorem]{\color{ForestGreen}{\textbf{Axiom}}}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{case}[theorem]{Case}
@@ -128,7 +192,8 @@
 \newtheorem{problem}[theorem]{Problem}
 
 \theoremstyle{definition}
-\newtheorem{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
+% \newtheorem{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
+\newmdtheoremenv{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
 \newtheorem{example}{\color{WildStrawberry}Example}[section]
 \newtheorem{assumption}{Assumption}[section]
 \newtheorem{condition}[assumption]{Condition}
@@ -568,7 +633,7 @@ for $U$ open in $\t_n$.
 Suppose $I$ is an set (wlog infinite). An \navy{ultrafilter $\UU$} on $I$ is a family of subsets of $I$ such that:
 $\UU$ is a filter:
 \begin{enumerate}
-\item $I \in \UU$, $\emptyset \not\in \UU$.
+\item \textbf{Contains $I$, not $\emptyset$}: $I \in \UU$, $\emptyset \not\in \UU$.
 \item \textbf{Closed upwards}: $A \in \UU, \ A \sse B \imp B \in \UU$.
 \item \textbf{Closed under finite intersections:} $A_1, \ldots, A_n \in \UU \imp A_1 \cap \cdots \cap A_n \in \UU$.
 \end{enumerate}
@@ -587,6 +652,28 @@ and $\UU$ satisfies the additional ``ultra'' condition:
 
 \begin{definition}[Finite intersection property (FIP)]
 A collection of subsets $\fF$ of $I$ has \navy{FIP} if whenever $A_1,\ldots,A_n \in \fF$ we have $\bigcap_{i=1}^n A_i \neq \emptyset$.
+\end{definition}
+
+\begin{definition}[Ultrafilter convergence]
+Suppose $(X,\t)$ is a topological space and $\UU$ is an ultrafilter on $X$. Then $\UU$ \navy{converges} to $\alpha$ (and we write $\UU \to \alpha$) for $\alpha \in X$ if every open set containing $\alpha$ is in $\UU$. In symbols
+\begin{equation}
+\UU \to \alpha \iff \forall V_\alpha \in \t : \alpha \in V_\alpha, V_\alpha \in \UU
+\end{equation}
+\end{definition}
+
+\begin{definition}[Quotient Map]
+Let $(X,\t)$, $(Y,\sigma)$ be topological spaces. A map $f: (X,\t) \to (Y,\sigma)$ is a \navy{quotient map} with respect to $(\t,\sigma)$ iff
+\begin{enumerate}
+\item $\forall A \sse Y: A \in \sigma \iff \inv{f}(A) \in \t$ (in words, a subset $A$ of $Y$ is open in $Y$ iff $\inv{f}(A)$ is open in $X$).
+\item $f$ surjective
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Quotient topology]
+If $(X,\t)$ is a topological space and $f:(X,\t) \to Y$ ($Y \neq \emptyset$) surjective, then the \navy{quotient topology} given by $f$ is
+\begin{equation}
+\sigma = \Set{A \sse Y; \inv{f}(A) \in \t}
+\end{equation}
 \end{definition}
 
 \begin{definition}[Difference]

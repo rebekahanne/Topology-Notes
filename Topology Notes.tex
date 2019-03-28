@@ -87,6 +87,9 @@
 \newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
 \newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
+% Framed theorems
+\usepackage[framemethod=TikZ]{mdframed}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Document Settings
@@ -116,14 +119,75 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+
+\newenvironment{theo}[2][]{%
+    \refstepcounter{theo}
+ 
+	\ifstrempty{#1}%
+	% if condition (without title)
+	{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=blue!20]
+	        {\strut Theorem~\thetheo};}
+	    }%
+	% else condition (with title)
+	}{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=blue!20]
+	        {\strut Theorem~\thetheo:~#1};}%
+	    }%
+	}%
+	% Both conditions
+	\mdfsetup{%
+	    innertopmargin=10pt,linecolor=blue!20,%
+	    linewidth=2pt,topline=true,%
+	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+ 
+\begin{mdframed}[]\relax}{%
+\end{mdframed}}
+
+\newcounter{prf}[section]\setcounter{prf}{0}
+\renewcommand{\theprf}{\arabic{section}.\arabic{prf}}
+\newenvironment{prf}[2][]{%
+\refstepcounter{prf}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=red!20]
+{\strut Proof~\theprf};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=red!20]
+{\strut Proof~\thetheo:~#1};}}%
+}%
+\mdfsetup{innertopmargin=10pt,linecolor=red!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\qed\end{mdframed}}
+
 % Environments
 
-\theoremstyle{plain}
-\newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
+\theoremstyle{definition}
+\newmdtheoremenv{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
+% \newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
 \newtheorem{claim}{\color{ForestGreen}{\textbf{Claim}}}[section]
-\newtheorem{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
-\newtheorem{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
-\newtheorem{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+% \newtheorem{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
+% \newtheorem{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
+% \newtheorem{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+\newmdtheoremenv{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
+\newmdtheoremenv{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
+\newmdtheoremenv{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+
 \newtheorem{axiom}[theorem]{\color{ForestGreen}{\textbf{Axiom}}}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{case}[theorem]{Case}
@@ -133,7 +197,8 @@
 \newtheorem{problem}[theorem]{Problem}
 
 \theoremstyle{definition}
-\newtheorem{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
+% \newtheorem{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
+\newmdtheoremenv{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
 \newtheorem{example}{\color{WildStrawberry}Example}[section]
 \newtheorem{assumption}{Assumption}[section]
 \newtheorem{condition}[assumption]{Condition}
@@ -1203,7 +1268,7 @@ Cantor space $\cC$ has
 	Suppose $I$ is an set (wlog infinite). An \navy{ultrafilter $\UU$} on $I$ is a family of subsets of $I$ such that:
 	$\UU$ is a filter:
 	\begin{enumerate}
-		\item $I \in \UU$, $\emptyset \not\in \UU$.
+		\item \textbf{Contains $I$, not $\emptyset$}: $I \in \UU$, $\emptyset \not\in \UU$.
 		\item \textbf{Closed upwards}: $A \in \UU, \ A \sse B \imp B \in \UU$.
 		\item \textbf{Closed under finite intersections:} $A_1, \ldots, A_n \in \UU \imp A_1 \cap \cdots \cap A_n \in \UU$. 
 	\end{enumerate}
@@ -1311,26 +1376,6 @@ Cantor space $\cC$ has
 	A collection of subsets $\fF$ of $I$ has \navy{FIP} if whenever $A_1,\ldots,A_n \in \fF$ we have $\bigcap_{i=1}^n A_i \neq \emptyset$. 
 \end{definition}
 
-\begin{theorem}[FIP $\imp$ ultrafilter extension]\label{thm:fipextension}
-	If $\fF$ has FIP, then there exists an ultrafilter $\UU$ extending $\fF$. That is, $\exists \UU$ such that $\UU \supseteq \fF$. 
-\end{theorem}
-\begin{proof}
-	Define a partial order as follows: let \[\PP = \Set{ \text{ set of subsets of I which (i) have FIP and (ii) are supersets of $\fF$}}\] 
-	Formally
-	\begin{equation}
-		\PP = \Set{A \sse \pP(I); A \supseteq \fF \text{ and $A$ has FIP}}
-	\end{equation}
-	The partial order $\triangleleft$ is $\subsetneq$. 
-
-	\begin{example}[]
-		Even/Odd
-
-		\improvement[inline]{Don't understand this example.}
-	\end{example}
-	
-\end{proof}
-
-
 \begin{corollary}
 	There exist non-principal ultrafilers. 
 \end{corollary}
@@ -1347,12 +1392,211 @@ Cantor space $\cC$ has
 	Therefore, extending the Frechet filter gives us a non-principal ultrafilter. 
 \end{proof}
 
+\begin{theorem}[FIP $\imp$ ultrafilter extension]\label{thm:fipextension}
+	If $\fF$ has FIP, then there exists an ultrafilter $\UU$ extending $\fF$. That is, $\exists \UU$ such that $\UU \supseteq \fF$. 
+\end{theorem}
+\begin{proof}
+	Define a partial order as follows: let \[\PP = \Set{ \text{ set of subsets of I which (i) have FIP and (ii) are supersets of $\fF$}}\] 
+	Formally
+	\begin{equation}
+		\PP = \Set{A \sse \pP(I); A \supseteq \fF \text{ and $A$ has FIP}}
+	\end{equation}
+	The partial order $\triangleleft$ is $\subsetneq$. 
+
+	\begin{example}[]
+		Even/Odd
+
+		\improvement[inline]{Don't understand this example.}
+	\end{example}
+
+	\begin{claim}
+		Chains in $\PP$ have upper bounds. 
+	\end{claim}
+	\begin{remark}
+		With this claim, we can apply Zorn's lemma. We will showing the the maximal elements of $\PP$ (which exist by Zorn) are ultrafilters containing $\fF$.
+	\end{remark}
+	
+	\begin{proof}
+		Let $\cC \sse \PP$ be a chain (thus any two elements are comparable). Define
+		\begin{equation}
+			\dD = \bigcup \cC 
+		\end{equation}
+		Informally, $\dD = \Set{A \sse I: A \text{ in some element of } \cC}$. We show that $\dD$ is an upper bound for $\cC$ in $\PP$ (notice, $\dD$ must indeed be \textbf{in} $\PP$). 
+		\begin{enumerate}
+			\item $\dD$ is an upper bound: clear. By definition, $\dD$ contains each element of $\cC$. 
+			\item $\dD \in \PP$: We must show the two conditions $\PP$ requires. 
+			\begin{enumerate}
+				\item $\dD \supseteq \fF$: Since each element of $\cC$ is a superset of $\fF$, we have that $\dD \supseteq \fF$. 
+				\item $\dD$ has FIP: Let $A_1,\ldots,A_n \in \dD$. These sets must come from elements of $\cC$. Thus there exist $C_1,\ldots,C_n \in \cC$ such that $A_1 \in C_1$, $\ldots$, $A_n \in C_n$. Since $\cC$ is a chain, one of $C_1,\ldots,C_n$ must contain the others. WLOG say $C_n$ contains the others. Then $A_1,\ldots,A_n \in C_n$. $C_n \in \PP$, so $C_n$ has FIP. Therefore $A_1 \cap \cdots \cap A_n \neq \emptyset$. 
+			\end{enumerate}
+		\end{enumerate}
+	\end{proof}
+	
+	By Zorn's lemma, we get a $\UU \in \PP$ maximal element. We show that $\UU$ is an ultrafilter. First show $\UU$ is a filter:
+	\begin{enumerate}
+		\item 
+		\item
+		\item
+	\end{enumerate}
+	\improvement[inline]{Show filter properties.}
+
+	Now show the ultra property. Let $A \sse I$. We must show that $A \in \UU$ or $I - A \in \UU$. For the sake of contradiction, suppose neither. Then 
+	\begin{enumerate}
+		\item $\UU \cap \Set{A} \supsetneq \UU$
+		\item $\UU \cap \Set{I-A} \supsetneq \UU$
+	\end{enumerate}
+	Since $\UU$ is $\PP$-maximal, we must have that
+	\begin{enumerate}
+		\item $\UU \cap \Set{A} \not\in \PP$
+		\item $\UU \cap \Set{I-A} \not\in \PP$
+	\end{enumerate}
+	Since these sets are not in $\PP$, they must violate one of the two properties elements of $\PP$ must have. We have that both are supersets of $\fF$. Thus the sets must violate FIP. We get that
+	\begin{enumerate}
+		\item $X_1,\ldots,X_m \in \UU$ such that $X_1\cap\cdots\cap X_m \cap A = \emptyset$.
+		\item $Y_1,\ldots,Y_n \in \UU$ such that $Y_1\cap\cdots\cap Y_n \cap (I-A) = \emptyset$.
+	\end{enumerate}
+	But then
+	\begin{equation}
+		Z = X_1\cap\cdots\cap X_m \cap Y_1\cap\cdots\cap Y_n = \emptyset
+	\end{equation}
+	This shows that $\UU$ doesn't have FIP, which is a contradiction. 
+\end{proof}
+
+\subsection{Ultrafilters in Topology}
+
+\begin{definition}[Ultrafilter convergence]
+	Suppose $(X,\t)$ is a topological space and $\UU$ is an ultrafilter on $X$. Then $\UU$ \navy{converges} to $\alpha$ (and we write $\UU \to \alpha$) for $\alpha \in X$ if every open set containing $\alpha$ is in $\UU$. In symbols
+	\begin{equation}
+		\UU \to \alpha \iff \forall V_\alpha \in \t : \alpha \in V_\alpha, V_\alpha \in \UU
+	\end{equation}
+\end{definition}
+
+
+\begin{theorem}[]
+	TFAE
+	\begin{enumerate}
+		\item $(X,\t)$ is compact.
+		\item Every ultrafilter on $X$ converges to some point. 
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof that (i) implies (ii)]
+	Prove the \textbf{contrapositive}. Suppose $(X,\t)$ is not compact. Let $\cC$ be an open cover with no finite subcover. We want to demonstrate/construct a non-convergent ultrafilter on $X$. Clearly, this ultrafilter can't be principal (since then every set in the principal ultrafilter contains a special point, so the ultrafilter trivially converges to this point). We will use the ultrafilter extension lemma: that is, we will construct a filter $\fF$ with FIP, so that we have an ultrafilter extending $\fF$. Let
+	\begin{equation}
+		\fF = \Set{X - A; A \in \cC}
+	\end{equation}
+
+	\begin{claim}[]
+		$\fF$ has FIP (and is a filter). 
+	\end{claim}
+	\begin{proof}
+		$\fF$ is the Frechet filter. Proof of FIP by \textbf{contradiction}. Suppose there exists a finite collection of sets $\Set{B_i}_{i=1}^n \sse \fF$ such that $\bigcap_{i=1}^n B_i = \emptyset$. But then
+		\begin{align*}
+			X &= X - \bigcap_{i=1}^n B_i \\
+			&= \bigcup_{i=1}^n (X - B_i)
+		\end{align*}
+		By assumption, since $B_i \in \fF$, we have that $X - B_i \in \cC$. Therefore we have demonstrated a finite subcover of $\cC$ (of $X$), which contradicts that $\cC$ has no finite subcover.  
+	\end{proof}
+
+	Thus by the ultrafilter extension lemma, there exists an ultrafilter $\UU$ on $X$ such that $\UU \supseteq \fF$. We want to show $\UU$ doesn't converge, so we must show $\forall \alpha \in X$, $\exists V_\alpha \in \t$ such that $V_\alpha \not\in \UU$. To show this, fix an $\alpha \in X$. Since $\cC$ is a cover, $\exists A_\alpha \in \cC$ such that $\alpha \in A_\alpha$. But then by construction $X - A_\alpha \in \fF \sse \UU$. Thus $A \not\in \UU$ (by axioms (1) and (3), since $X - A \in \UU$). 
+			
+\end{proof}
+
+\begin{proof}[Proof that (ii) implies (i)]
+	Prove the \textbf{contrapositive}. Suppose $\UU$ is an ultrafilter with no limit. This means
+	\begin{equation}
+		\forall \alpha \in X, \exists V_\alpha \in \t : \alpha \in V_\alpha, V_\alpha \not\in \UU
+	\end{equation}
+	Consider
+	\begin{equation}
+		\cC = \Set{V_\alpha : \alpha \in X}
+	\end{equation}
+	\begin{claim}[]
+		$\cC$ is an (open) cover with no finite subcover.  
+	\end{claim}
+	\begin{proof}
+		In words, there is no finite subcover iff no finite union is everything. We show each property.
+		\begin{enumerate}
+			\item $\cC$ is an open cover: $\forall \alpha\in X$, $\alpha \in V_\alpha \in \cC$, so $\bigcup \cC = X$.
+			\item $\cC$ does not have a finite subcover: prove by contradiction. Suppose there exist $V_{\alpha_1},\ldots,V_{\alpha_n} \in \cC$ such that $\bigcup_{i=1}^n V_{\alpha_i} = X$. Then
+			\begin{equation}
+				X - \bigcup_{i=1}^n V_{\alpha_i} = \emptyset
+			\end{equation}
+			But also
+			\begin{equation}
+				X - \bigcup_{i=1}^n V_{\alpha_i} = \bigcap_{i=1}^n (X - V_{\alpha_i})
+			\end{equation}
+			We have that, for each $i$, $V_{\alpha_i} \not\in \UU$, so that by the ultrafilter property, $X - V_{\alpha_i} \in \UU$. But then $\bigcap_{i=1}^n (X - V_{\alpha_i}) = \emptyset$, and we have thus found a finite collection of sets in $\UU$ with an empty intersection, so $\UU$ doesn't have FIP. This is a contradiction. 
+		\end{enumerate}
+
+		This claim shows that $(X,\t)$ is not compact, which proves the contrapositive. 
+	\end{proof}
+	
+\end{proof}
 
 
 
-\begin{proof}[Proof via ultrafilters]
+\subsection{Proof of Tychonoff via ultrafilters}
+
+\begin{proof}[Proof of Tychonoff via ultrafilters]
+
 
 \end{proof}
+
+\section{Quotient Topology}
+
+\begin{definition}[Quotient Map]
+	Let $(X,\t)$, $(Y,\sigma)$ be topological spaces. A map $f: (X,\t) \to (Y,\sigma)$ is a \navy{quotient map} with respect to $(\t,\sigma)$ iff
+	\begin{enumerate}
+		\item $\forall A \sse Y: A \in \sigma \iff \inv{f}(A) \in \t$ (in words, a subset $A$ of $Y$ is open in $Y$ iff $\inv{f}(A)$ is open in $X$).
+		\item $f$ surjective
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Quotient topology]
+	If $(X,\t)$ is a topological space and $f:(X,\t) \to Y$ ($Y \neq \emptyset$) surjective, then the \navy{quotient topology} given by $f$ is
+	\begin{equation}
+		\sigma = \Set{A \sse Y; \inv{f}(A) \in \t}
+	\end{equation}
+\end{definition}
+
+
+
+\newpage
+\section{Practice Questions}
+
+\subsection{Midterm}
+
+\begin{exercise}
+	Suppose 
+	\begin{itemize}
+		\item $X,Y$ are nonempty sets
+		\item $\t = \pP(X)$
+		\item $\sigma = \pP(Y)$
+	\end{itemize}
+	Show $(X,\t)$ and $(Y,\sigma)$ are topological spaces and $\t \otimes \sigma = \pP(X \times Y)$. 
+\end{exercise}
+\begin{proof}
+	$(X,\t)$ and $(Y,\sigma)$ are clearly topological spaces since the power set is all possible subsets: this immediately implies all the axioms are satisfied. 
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 \appendix
@@ -1566,8 +1810,6 @@ Cantor space $\cC$ has
 
 	Now suppose $f$ satisfies the topological definition of continuity. Fix $x \in \RR$ and $\e > 0$. Let $U = (f(x) -\e, f(x) + \e)$. $U$ is open. Thus $\inv{f}(U)$ is also open. Thus for $x \in \inv{f}(U)$, we can find an open interval (i.e., a basic open) $(a,b)$ such that $x \in (a,b) \sse \inv{f}(U)$. Set $\d_1 = x - a$ and $\d_2 = b - x$ and $\d = \min\{\d_1,\d_2\}$. Then $(x-\d,x+\d) \sse (a,b) \ss \inv{f}(U)$. So we have found a $\d > 0$ such that $f((x-\d,x+\d)) \sse (f(x)-\e,f(x)+\e)$. 
 \end{solution}
-
-
 
 
 \end{document}
