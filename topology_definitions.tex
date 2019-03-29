@@ -2,7 +2,7 @@
 %% This is file, `topology_definitions.tex',
 %% generated with the extract package.
 %% 
-%% Generated on :  2019/03/28,11:38
+%% Generated on :  2019/03/28,23:23
 %% From source  :  "Topology Notes".tex
 %% Using options:  active,generate=topology_definitions,extract-env={definition,algorithm}
 %% 
@@ -114,6 +114,41 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\newcounter{defi}[section]\setcounter{defi}{0}
+\newcommand{\thedef}{\arabic{section}.\arabic{defi}}
+
+\newenvironment{defi}[2][]{%
+    \refstepcounter{defi}
+
+\ifstrempty{#1}%
+% if condition (without title)
+{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=MidnightBlue!20]
+        {\strut Definition~\thedef};}
+    }%
+% else condition (with title)
+}{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=MidnightBlue!30]
+        {\strut Definition~\thedef:~#1};}%
+    }%
+}%
+% Both conditions
+\mdfsetup{%
+    innertopmargin=10pt,linecolor=MidnightBlue!30,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+}
+
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+
 \newcounter{theo}[section]\setcounter{theo}{0}
 \renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
 
@@ -125,63 +160,201 @@
 {\mdfsetup{%
     frametitle={%
         \tikz[baseline=(current bounding box.east),outer sep=0pt]
-        \node[anchor=east,rectangle,fill=blue!20]
+        \node[anchor=east,rectangle,fill=PineGreen!20]
         {\strut Theorem~\thetheo};}
     }%
 % else condition (with title)
 }{\mdfsetup{%
     frametitle={%
         \tikz[baseline=(current bounding box.east),outer sep=0pt]
-        \node[anchor=east,rectangle,fill=blue!20]
+        \node[anchor=east,rectangle,fill=PineGreen!30]
         {\strut Theorem~\thetheo:~#1};}%
     }%
 }%
 % Both conditions
 \mdfsetup{%
-    innertopmargin=10pt,linecolor=blue!20,%
+    innertopmargin=10pt,linecolor=PineGreen!30,%
     linewidth=2pt,topline=true,%
     frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
 }
 
-\begin{mdframed}[]\relax}{%
+\begin{mdframed}[]\relax}{
+
 \end{mdframed}}
 
-\newcounter{prf}[section]\setcounter{prf}{0}
-\renewcommand{\theprf}{\arabic{section}.\arabic{prf}}
-\newenvironment{prf}[2][]{%
-\refstepcounter{prf}%
+
+\newcounter{claim}[section]\setcounter{claim}{0}
+\renewcommand{\theclaim}{\arabic{section}.\arabic{claim}}
+
+\newenvironment{claim}[2][]{%
+    \refstepcounter{claim}
+
 \ifstrempty{#1}%
+% if condition (without title)
 {\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=red!20]
-{\strut Proof~\theprf};}}
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!20]
+        {\strut Claim~\theclaim};}
+    }%
+% else condition (with title)
+}{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!30]
+        {\strut Claim~\theclaim:~#1};}%
+    }%
 }%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=red!20]
-{\strut Proof~\thetheo:~#1};}}%
-}%
-\mdfsetup{innertopmargin=10pt,linecolor=red!20,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+% Both conditions
+\mdfsetup{%
+    innertopmargin=10pt,linecolor=PineGreen!30,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
 }
-\begin{mdframed}[]\relax%
-\label{#2}}{\qed\end{mdframed}}
+
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newcounter{corollary}[section]\setcounter{corollary}{0}
+\newcommand{\thecor}{\arabic{section}.\arabic{corollary}}
+
+\newenvironment{corollary}[2][]{%
+    \refstepcounter{corollary}
+
+\ifstrempty{#1}%
+% if condition (without title)
+{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!20]
+        {\strut Corollary~\thecor};}
+    }%
+% else condition (with title)
+}{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!30]
+        {\strut Corollary~\thecor:~#1};}%
+    }%
+}%
+% Both conditions
+\mdfsetup{%
+    innertopmargin=10pt,linecolor=PineGreen!30,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+}
+
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newcounter{lemma}[section]\setcounter{lemma}{0}
+\newcommand{\thelem}{\arabic{section}.\arabic{lemma}}
+
+\newenvironment{lemma}[2][]{%
+    \refstepcounter{lemma}
+
+\ifstrempty{#1}%
+% if condition (without title)
+{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!20]
+        {\strut Lemma~\thelem};}
+    }%
+% else condition (with title)
+}{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!30]
+        {\strut Lemma~\thelem:~#1};}%
+    }%
+}%
+% Both conditions
+\mdfsetup{%
+    innertopmargin=10pt,linecolor=PineGreen!30,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+}
+
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newcounter{example}[section]\setcounter{example}{0}
+\newcommand{\theex}{\arabic{section}.\arabic{example}}
+
+\newenvironment{example}[2][]{%
+    \refstepcounter{example}
+
+\ifstrempty{#1}%
+% if condition (without title)
+{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=Aquamarine!20]
+        {\strut Example~\theex};}
+    }%
+% else condition (with title)
+}{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=Aquamarine!30]
+        {\strut Example~\theex:~#1};}%
+    }%
+}%
+% Both conditions
+\mdfsetup{%
+    innertopmargin=10pt,linecolor=Aquamarine!30,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+}
+
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newenvironment{prf}[1][]{%
+
+\ifstrempty{#1}%
+% if condition (without title)
+{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!20]
+        {\strut Proof};}
+    }%
+% else condition (with title)
+}{\mdfsetup{%
+    frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=PineGreen!30]
+        {\strut ~#1};}%
+    }%
+}%
+% Both conditions
+\mdfsetup{%
+    innertopmargin=10pt,linecolor=PineGreen!30,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+}
+
+\begin{mdframed}[]\relax}{\qed
+\end{mdframed}}
 
 % Environments
 
 \theoremstyle{definition}
 \newmdtheoremenv{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
 % \newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
-\newtheorem{claim}{\color{ForestGreen}{\textbf{Claim}}}[section]
+% \newtheorem{claim}{\color{ForestGreen}{\textbf{Claim}}}[section]
 % \newtheorem{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
 % \newtheorem{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
 % \newtheorem{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
-\newmdtheoremenv{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
+% \newmdtheoremenv{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
 \newmdtheoremenv{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
-\newmdtheoremenv{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+% \newmdtheoremenv{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
 
 \newtheorem{axiom}[theorem]{\color{ForestGreen}{\textbf{Axiom}}}
 \newtheorem{conjecture}[theorem]{Conjecture}
@@ -194,7 +367,7 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 \theoremstyle{definition}
 % \newtheorem{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
 \newmdtheoremenv{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
-\newtheorem{example}{\color{WildStrawberry}Example}[section]
+% \newtheorem{example}{\color{WildStrawberry}Example}[section]
 \newtheorem{assumption}{Assumption}[section]
 \newtheorem{condition}[assumption]{Condition}
 \newtheorem*{solution}{\color{Goldenrod}Solution}
@@ -402,285 +575,5 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 
 
 \begin{document}
-
-\begin{definition}[Set cardinality $\leq$]
-Let $A, B$ be sets. $A$ has \navy{cardinality less than or equal to} $B$ (write $\abs{A} \leq \abs{B}$) if there exists an injection from $A$ to $B$. In notation,
-\begin{equation}
-\abs{A} \leq \abs{B} \iff \exists f:A \to B \text{ injective }
-\end{equation}
-\end{definition}
-
-\begin{definition}[Partial order]
-A \navy{partial order} is a pair $\aAA = (A, \triangleright)$ where $A \neq \emptyset$ such that  for $a,b,c \in A$
-\begin{enumerate}
-\item Antireflexivity: $a \triangleright a$ never happens.
-\item Transitivity: $a \triangleright b, b \triangleright c \imp a \triangleright c$
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Maximal]
-Let $(A, \triangleright)$ be a partial order. Then $m \in A$ is maximal if and only if no $a \triangleright m$.
-\end{definition}
-
-\begin{definition}[Chain]
-A \navy{chain} in a partial order $(A, \triangleright)$ is a $C \subseteq A$ such that $\forall a,b \in C$, $a=b$ or $a \triangleright b$ or $b \triangleright a$. (One interpretation in words, ``$C$ is linear'')
-\end{definition}
-
-\begin{definition}[Topology, Topological Space]
-A \navy{topological space} is a pair $(X,\tT)$ where $X$ is a nonempty set and $\tT$ is a set of subsets of $X$ (called a \navy{topology}) having the following properties:
-\begin{enumerate}
-\item $\emptyset$ and $X$ are in $\tT$.
-\begin{equation}
-\emptyset \in \tT,\ X \in \tT
-\end{equation}
-\item The union of \textit{arbitrarily} many sets in $\tT$ is in $\tT$.
-\begin{equation}
-A_\eta \in \tT \ \forall \eta \in H \imp \bigcup_{\eta \in H} A_\eta = \Set{a \in X \text{ for some (that is, } a \in A_\eta \text{)}} \in \tT
-\end{equation}
-\item The intersection a \textit{finite} number of sets in $\tT$ is in $\tT$.
-\begin{equation}
-A_1, \ldots, A_n \in \tT \imp A_1 \cap \cdots \cap A_n \in \tT
-\end{equation}
-\end{enumerate}
-A set $X$ for which a topology $\tT$ has been specified is called a \navy{topological space}, that is, the pair $(X,\tT)$.
-\end{definition}
-
-\begin{definition}[(Strictly) Finer, (Strictly) Coarser, Comparable]
-Suppose $\tT$ and $\tT'$ are two topologies on a given set $X$. If $\tT' \supset \tT$, we say that $\tT'$ is \navy{finer} than $\tT$. If $\tT'$ properly contains $\tT$, we say that $\tT'$ is \navy{strictly finer} than $\tT$. For these respective situations, we say that $\tT$ is \navy{coarser} or \navy{strictly coarser} than $\tT'$. We say that $\tT$ is \navy{comparable} with $\tT'$ if either $\tT' \supset \tT$ or $\tT \supset \tT'$.
-\end{definition}
-
-\begin{definition}[Basis, Basis Elements, Topology $\tT$ generated by $\bB$]
-If $X$ is a set, a \navy{basis} for a topology on $X$ is a collection $\bB \ss \pP(X)$ of subsets of $X$ (called \navy{basis elements}) such that
-\begin{enumerate}
-\item Every element $x \in X$ belongs to some set in $\bB$. In symbols
-\begin{equation}
-\forall x \in X \ \exists B \in \bB \ s.t. \ x \in B
-\end{equation}
-\item If $x$ belongs to the intersection of two basis elements $B_1$ and $B_2$, then there is a basis element $B_3$ containing $x$ such that $B_3 \subset B_1 \cap B_2$. More generally, in symbols
-\begin{equation}
-\forall B_1,\ldots,B_n \in \bB \ \forall x \in \bigcap_{i=1}^n B_i \ \exists B \in \bB \ s.t. \ x \in B \ss \bigcap_{i=1}^n B_i
-\end{equation}
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Topology $\tT$ generated by $\bB$]
-If $\bB$ is a basis for a topology on $X$, then we define the \navy{topology $\tT$ generated by $\bB$} as follows: A subset $U$ of $X$ is said to be open in $X$ (that is, to be an element of $\tT$) if for each $x \in U$, there is a basis element $B_x \in \bB$ such that $x \in B_x$ and $B_x \subset U$. Note that each basis element is itself an element of $\tT$. More succinctly:
-\begin{equation*}
-U \ss X: U \in \tT \iff \forall x\in U \ \exists B_x \in \bB \ s.t. \ x \in B_x \ss U
-\end{equation*}
-
-\end{definition}
-
-\begin{definition}[Subbasis]
-A \navy{subbasis} for a topology on $X$ is a collection of subsets $\sS \ss \pP(X)$ of $X$ whose union equals $X$ (that is, $\bigcup \sS = X$). The topology generated by the subbasis $\sS$ is defined to be the collection $\tT$ of all unions of finite intersections of elements of $\sS$.
-\end{definition}
-
-\begin{definition}[Closed]
-A subset $A$ of a topological space $(X,\tT)$ is said to be \navy{closed} if the set $X - A \in \tT$. In words, a subset of a topological space is closed if its complement (in the space) is open.
-\end{definition}
-
-\begin{definition}[Continuous]
-Let $(X,\tT)$ and $(Y,\sigma)$ be topological spaces. A function $f : X \to Y$ is said to be \navy{continuous} with respect to $\tT$ and $\sigma$ if for each open subset $V$ of $Y$, the set $f^{-1}(V)$ is an open subset of $X$. In symbols, $\forall S \in \sigma$, we have that $\inv{f}(S) \in \tT$ (where $\inv{f}(S) = \Set{a \in X; f(a) \in S}$). In words, the preimage of an open set is open.
-\end{definition}
-
-\begin{definition}[Homeomorphic]
-The topological spaces $(X,\tT)$ and $(Y,\sigma)$ are \navy{homeomorphic} if there exists a function $f: X \to Y$ such that
-\begin{enumerate}
-\item $f$ is bijective.
-\item $f$ is continuous.
-\item $\inv{f}$ is also continuous.
-\end{enumerate}
-We write $(X,\tT) \cong (Y,\sigma)$ or $f: (X,\tT) \cong (Y,\sigma)$.
-\end{definition}
-
-\begin{definition}[Open map]
-$f: (X,\tT) \to (Y,\sigma)$ is an \navy{open map} if $\forall S \in \tT$ we have that $f(S) \in \sigma$ (recall $f(S) = \Set{f(s);s \in S}$). In words: open sets map to open sets.
-\end{definition}
-
-\begin{definition}[Closed map]
-$f: (X,\tT) \to (Y,\sigma)$ is a \navy{closed map} if $\forall S \ss X$ such that $X - S \in \tT$ we have that $Y - f(S) \in \sigma$. In words: closed sets map to closed sets.
-\end{definition}
-
-\begin{definition}[Subspace topology]
-Given a topological space $(X,\tT)$ and a non-empty set $A \sse X$, the \navy{subspace topology on $A$ induced (or given) by $\tT$} is $(A, \t_A)$ where $\tT_A = \Set{U \cap A; U \in \tT}$.
-\end{definition}
-
-\begin{definition}[Connected]
-A space $(X,\t)$ is \navy{connected} if whenever sets $V,W$ are
-\begin{enumerate}
-\item Nonempty
-\item Open
-\item $V \cup W = X$
-\end{enumerate}
-we have $V \cap W \neq \emptyset$.
-\end{definition}
-
-\begin{definition}[Metric space]
-A \navy{metric space} is a nonempty set $X$ together with a binary function $d : X\times X \to \RR$ which satisfies the following properties: For all $x,y,z \in X$ we have that
-\begin{enumerate}
-\item Positivity: $d(x,y) \geq 0$
-\item Definiteness: $d(x,y) = 0$ if and only if $x=y$
-\item Symmetry: $d(x,y) = d(y,x)$
-\item Triangle inequality: $d(x,y) + d(y,z) \geq d(x,z)$
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Metric topology]
-Given a metric space $(X,d)$, the set $\bB = \Set{B_\e(x); \e > 0, x \in X}$ is a basis for a topology on $X$ (where $B_\e(x) = \Set{y \in X; d(x,y) < \e}$) called the \navy{metric topology}.
-\end{definition}
-
-\begin{definition}[Open Set in Metric Topology]
-A set is \navy{open} in the metric topology induced by $d$ if and only if for each $y \in U$ there is a $\d > 0$ such that $B_d(y, \d) \ss U$.
-\end{definition}
-
-\begin{definition}[$T_2$, Hausdorff]
-$(X,\t)$ is \navy{$T_2$ (Hausdorff)} if for every distinct $a,b \in X$, there exist open sets $V,W \in \t$ such that $a \in V$, $b \in W$, and $V \cap W = \emptyset$.
-\end{definition}
-
-\begin{definition}[Converges]
-Fix a topological space $(X,\tT)$. A sequence of points $(a_i)_{i \in \NN} \ss X$ \navy{converges} to $b \in X$ if for every open set $W$ containing $b$, all but finitely many of the terms of the sequence are in $W$. In symbols
-\begin{equation*}
-(a_i)_{i \in \NN} \to b \iff \forall W\in \tT \text{ s.t. } b \in W, \exists N \in \NN \text{ s.t. } \forall m > n, a_m \in W
-\end{equation*}
-
-\end{definition}
-
-\begin{definition}[Sequentially closed]
-A set $S \ss X$ is \navy{sequentially closed} if for every sequence $(a_i)_{i \in \NN}$ of points in $S$ converging to some $b \in X$, we have $b \in S$.
-\end{definition}
-
-\begin{definition}[Product topology, two sets]
-Let $(X,\t)$ and $(Y,\sigma)$ be topological spaces. The \navy{product topology} on $X \times Y$ is the topology having as \emph{basis} the collection $\bB$ of all set of the form $U \times V$ where $U$ is an open subset of $X$ and $V$ is an open subset of $Y$. In symbols,
-\begin{equation}
-\bB_{\t \times \sigma} = \Set{U \times V; U \in \t, V \in \sigma}
-\end{equation}
-\end{definition}
-
-\begin{definition}[Product space/topology for finitely many spaces]
-Let $(X_1,\t_1), \ldots, (X_n,\t_n)$ be topological spaces. The set of points of the \navy{product space} is $X_1 \times \cdots \times X_n$. The basis for the \navy{product topology} is
-\begin{equation}
-\bB_{\t_1 \times \cdots \times \t_n} = \Set{W_1 \times \cdots \times W_n; W_i \in \t_i}
-\end{equation}
-\end{definition}
-
-\begin{definition}[Projection Maps]
-Let $(X_1,\t_1)$ and $(X_2,\t_2)$ be topological spaces. Let
-\begin{align*}
-&\pi_1:X_1 \times X_2 \to X_1 : (x_1,x_2) \mapsto x_1 \\
-&\pi_2:X_1 \times X_2 \to X_2 : (x_1,x_2) \mapsto x_2
-\end{align*}
-then $\pi_1$ and $\pi_2$ are \navy{projection maps}.
-\end{definition}
-
-\begin{definition}[Open cover]
-An \navy{open cover} of $(X,\t)$ is a family of $\t$-open sets $\cC \ss \t$ such that $\bigcup \cC = X$.
-\end{definition}
-
-\begin{definition}[Subcover]
-$\dD$ is a \navy{subcover} of $\cC$ if
-\begin{enumerate}
-\item $\dD \ss \cC$.
-\item $\dD$ is an open cover.
-\end{enumerate}
-A \navy{finite subcover} is a subcover which is finite.
-\end{definition}
-
-\begin{definition}[Compact]
-A topological space $(X,\t)$ is \navy{compact} if every open cover has a finite subcover.
-\end{definition}
-
-\begin{definition}[Cartesian Product (Possibly Infinite)]
-Let $\Set{X_i}_{i\in I}$ be a family of sets, where $I$ is an arbitrary index set. The \navy{Cartesian product} $\prod_{i \in I} X_i$ is the set of all functions $f$ such that
-\begin{enumerate}
-\item $f: I \to \cup_{i \in I} X_i$
-\item $f(i) \in X_i$
-\end{enumerate}
-In words, $f$ picks out a point from each set. In notation
-\begin{equation}
-\prod_{i \in I} X_i = \Set{f: I \to \cup_{i \in I} X_i; f(i) \in X_i) \forall i \in I}
-\end{equation}
-\end{definition}
-
-\begin{definition}[Product Space]
-Let $I$ be an arbitrary index set. Suppose for each $i \in I$ we have that $(X_i, \t_i)$ is a topological space. Their \navy{product space} has
-\begin{itemize}
-\item Underlying set:
-\begin{equation}
-\prod_{i \in I} X_i
-\end{equation}
-\item Topology:
-\begin{itemize}
-\item Informally: $\bigotimes_{i \in I} \t_i$ generated by the subbasis of ``wedges'': that is, the topology generated by the subbasis
-\begin{equation}
-\bB = \text{``all sets of the form''} \quad \cdots \times X_i \times X_j \times \cdots \times \underbrace{U}_{n \text{th term}} \times X_k \times \cdots
-\end{equation}
-for $U$ open in $\t_n$.
-\improvement[inline]{Figure.}
-\item Formally: $\bigotimes_{i \in I} \t_i$ generated by the subbasis $\bB$, which is sets of the form
-\begin{equation}
-\Set{f \in \prod_{i \in I} X_i; f(k) \in W} \quad k \in I, W \in \t_k
-\end{equation}
-\item Alternative: $\bigotimes_{i \in I} \t_i$ is the coarsest topology making all projection maps continuous (where $\pi_i: f \mapsto f(i)$).
-\begin{equation}
-\pi_i^{-1}(U) \in \bB
-\end{equation}
-\improvement[inline]{What does this mean?}
-\end{itemize}
-\end{itemize}
-\end{definition}
-
-\begin{definition}[Ultrafilter]
-Suppose $I$ is an set (wlog infinite). An \navy{ultrafilter $\UU$} on $I$ is a family of subsets of $I$ such that:
-$\UU$ is a filter:
-\begin{enumerate}
-\item \textbf{Contains $I$, not $\emptyset$}: $I \in \UU$, $\emptyset \not\in \UU$.
-\item \textbf{Closed upwards}: $A \in \UU, \ A \sse B \imp B \in \UU$.
-\item \textbf{Closed under finite intersections:} $A_1, \ldots, A_n \in \UU \imp A_1 \cap \cdots \cap A_n \in \UU$.
-\end{enumerate}
-and $\UU$ satisfies the additional ``ultra'' condition:
-\begin{enumerate}
-\item[(iv)] $\forall A \sse I$, $A \in \UU$ or $I - A \in \UU$ (but not both, by (i) and (iii))
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Principal ultrafilter]
-\navy{Principal ultrafilters} take the form
-\begin{equation}
-\angles{a} = \Set{A \sse I: a \in A} \qquad \text{ for some } a \in I
-\end{equation}
-\end{definition}
-
-\begin{definition}[Finite intersection property (FIP)]
-A collection of subsets $\fF$ of $I$ has \navy{FIP} if whenever $A_1,\ldots,A_n \in \fF$ we have $\bigcap_{i=1}^n A_i \neq \emptyset$.
-\end{definition}
-
-\begin{definition}[Ultrafilter convergence]
-Suppose $(X,\t)$ is a topological space and $\UU$ is an ultrafilter on $X$. Then $\UU$ \navy{converges} to $\alpha$ (and we write $\UU \to \alpha$) for $\alpha \in X$ if every open set containing $\alpha$ is in $\UU$. In symbols
-\begin{equation}
-\UU \to \alpha \iff \forall V_\alpha \in \t : \alpha \in V_\alpha, V_\alpha \in \UU
-\end{equation}
-\end{definition}
-
-\begin{definition}[Quotient Map]
-Let $(X,\t)$, $(Y,\sigma)$ be topological spaces. A map $f: (X,\t) \to (Y,\sigma)$ is a \navy{quotient map} with respect to $(\t,\sigma)$ iff
-\begin{enumerate}
-\item $\forall A \sse Y: A \in \sigma \iff \inv{f}(A) \in \t$ (in words, a subset $A$ of $Y$ is open in $Y$ iff $\inv{f}(A)$ is open in $X$).
-\item $f$ surjective
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Quotient topology]
-If $(X,\t)$ is a topological space and $f:(X,\t) \to Y$ ($Y \neq \emptyset$) surjective, then the \navy{quotient topology} given by $f$ is
-\begin{equation}
-\sigma = \Set{A \sse Y; \inv{f}(A) \in \t}
-\end{equation}
-\end{definition}
-
-\begin{definition}[Difference]
-The \navy{difference} of two sets, denoted $A-B$, is the set consisting of those elements of $A$ that are not in $B$. In notation
-\begin{equation*}
-A - B = \{x | x \in A \text{ and } x \not\in B\}
-\end{equation*}
-\end{definition}
 
 \end{document}

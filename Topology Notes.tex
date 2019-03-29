@@ -119,6 +119,41 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\newcounter{defi}[section]\setcounter{defi}{0}
+\newcommand{\thedef}{\arabic{section}.\arabic{defi}}
+
+\newenvironment{defi}[2][]{%
+    \refstepcounter{defi}
+ 
+	\ifstrempty{#1}%
+	% if condition (without title)
+	{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=MidnightBlue!20]
+	        {\strut Definition~\thedef};}
+	    }%
+	% else condition (with title)
+	}{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=MidnightBlue!30]
+	        {\strut Definition~\thedef:~#1};}%
+	    }%
+	}%
+	% Both conditions
+	\mdfsetup{%
+	    innertopmargin=10pt,linecolor=MidnightBlue!30,%
+	    linewidth=2pt,topline=true,%
+	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+ 
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+
 \newcounter{theo}[section]\setcounter{theo}{0}
 \renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
 
@@ -130,63 +165,201 @@
 	{\mdfsetup{%
 	    frametitle={%
 	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
-	        \node[anchor=east,rectangle,fill=blue!20]
+	        \node[anchor=east,rectangle,fill=PineGreen!20]
 	        {\strut Theorem~\thetheo};}
 	    }%
 	% else condition (with title)
 	}{\mdfsetup{%
 	    frametitle={%
 	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
-	        \node[anchor=east,rectangle,fill=blue!20]
+	        \node[anchor=east,rectangle,fill=PineGreen!30]
 	        {\strut Theorem~\thetheo:~#1};}%
 	    }%
 	}%
 	% Both conditions
 	\mdfsetup{%
-	    innertopmargin=10pt,linecolor=blue!20,%
+	    innertopmargin=10pt,linecolor=PineGreen!30,%
 	    linewidth=2pt,topline=true,%
 	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
 	}
  
-\begin{mdframed}[]\relax}{%
+\begin{mdframed}[]\relax}{
+
 \end{mdframed}}
 
-\newcounter{prf}[section]\setcounter{prf}{0}
-\renewcommand{\theprf}{\arabic{section}.\arabic{prf}}
-\newenvironment{prf}[2][]{%
-\refstepcounter{prf}%
-\ifstrempty{#1}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=red!20]
-{\strut Proof~\theprf};}}
-}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=red!20]
-{\strut Proof~\thetheo:~#1};}}%
-}%
-\mdfsetup{innertopmargin=10pt,linecolor=red!20,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax
-}
-\begin{mdframed}[]\relax%
-\label{#2}}{\qed\end{mdframed}}
+
+\newcounter{claim}[section]\setcounter{claim}{0}
+\renewcommand{\theclaim}{\arabic{section}.\arabic{claim}}
+
+\newenvironment{claim}[2][]{%
+    \refstepcounter{claim}
+ 
+	\ifstrempty{#1}%
+	% if condition (without title)
+	{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!20]
+	        {\strut Claim~\theclaim};}
+	    }%
+	% else condition (with title)
+	}{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!30]
+	        {\strut Claim~\theclaim:~#1};}%
+	    }%
+	}%
+	% Both conditions
+	\mdfsetup{%
+	    innertopmargin=10pt,linecolor=PineGreen!30,%
+	    linewidth=2pt,topline=true,%
+	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+ 
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newcounter{corollary}[section]\setcounter{corollary}{0}
+\newcommand{\thecor}{\arabic{section}.\arabic{corollary}}
+
+\newenvironment{corollary}[2][]{%
+    \refstepcounter{corollary}
+ 
+	\ifstrempty{#1}%
+	% if condition (without title)
+	{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!20]
+	        {\strut Corollary~\thecor};}
+	    }%
+	% else condition (with title)
+	}{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!30]
+	        {\strut Corollary~\thecor:~#1};}%
+	    }%
+	}%
+	% Both conditions
+	\mdfsetup{%
+	    innertopmargin=10pt,linecolor=PineGreen!30,%
+	    linewidth=2pt,topline=true,%
+	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+ 
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newcounter{lemma}[section]\setcounter{lemma}{0}
+\newcommand{\thelem}{\arabic{section}.\arabic{lemma}}
+
+\newenvironment{lemma}[2][]{%
+    \refstepcounter{lemma}
+ 
+	\ifstrempty{#1}%
+	% if condition (without title)
+	{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!20]
+	        {\strut Lemma~\thelem};}
+	    }%
+	% else condition (with title)
+	}{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!30]
+	        {\strut Lemma~\thelem:~#1};}%
+	    }%
+	}%
+	% Both conditions
+	\mdfsetup{%
+	    innertopmargin=10pt,linecolor=PineGreen!30,%
+	    linewidth=2pt,topline=true,%
+	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+ 
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newcounter{example}[section]\setcounter{example}{0}
+\newcommand{\theex}{\arabic{section}.\arabic{example}}
+
+\newenvironment{example}[2][]{%
+    \refstepcounter{example}
+ 
+	\ifstrempty{#1}%
+	% if condition (without title)
+	{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=Aquamarine!20]
+	        {\strut Example~\theex};}
+	    }%
+	% else condition (with title)
+	}{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=Aquamarine!30]
+	        {\strut Example~\theex:~#1};}%
+	    }%
+	}%
+	% Both conditions
+	\mdfsetup{%
+	    innertopmargin=10pt,linecolor=Aquamarine!30,%
+	    linewidth=2pt,topline=true,%
+	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+ 
+\begin{mdframed}[]\relax}{
+
+\end{mdframed}}
+
+\newenvironment{prf}[1][]{%
+ 
+	\ifstrempty{#1}%
+	% if condition (without title)
+	{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!20]
+	        {\strut Proof};}
+	    }%
+	% else condition (with title)
+	}{\mdfsetup{%
+	    frametitle={%
+	        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+	        \node[anchor=east,rectangle,fill=PineGreen!30]
+	        {\strut ~#1};}%
+	    }%
+	}%
+	% Both conditions
+	\mdfsetup{%
+	    innertopmargin=10pt,linecolor=PineGreen!30,%
+	    linewidth=2pt,topline=true,%
+	    frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+ 
+\begin{mdframed}[]\relax}{\qed
+\end{mdframed}}
 
 % Environments
 
 \theoremstyle{definition}
 \newmdtheoremenv{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
 % \newtheorem{theorem}{\color{ForestGreen}{\textbf{Theorem}}}[section]
-\newtheorem{claim}{\color{ForestGreen}{\textbf{Claim}}}[section]
+% \newtheorem{claim}{\color{ForestGreen}{\textbf{Claim}}}[section]
 % \newtheorem{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
 % \newtheorem{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
 % \newtheorem{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
-\newmdtheoremenv{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
+% \newmdtheoremenv{lemma}[theorem]{\color{ForestGreen}{\textbf{Lemma}}}
 \newmdtheoremenv{proposition}[theorem]{\color{ForestGreen}{\textbf{Proposition}}}
-\newmdtheoremenv{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
+% \newmdtheoremenv{corollary}[theorem]{\color{ForestGreen}{\textbf{Corollary}}}
 
 \newtheorem{axiom}[theorem]{\color{ForestGreen}{\textbf{Axiom}}}
 \newtheorem{conjecture}[theorem]{Conjecture}
@@ -199,7 +372,7 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 \theoremstyle{definition}
 % \newtheorem{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
 \newmdtheoremenv{definition}{\color{MidnightBlue}{\textbf{Definition}}}[section]
-\newtheorem{example}{\color{WildStrawberry}Example}[section]
+% \newtheorem{example}{\color{WildStrawberry}Example}[section]
 \newtheorem{assumption}{Assumption}[section]
 \newtheorem{condition}[assumption]{Condition}
 \newtheorem*{solution}{\color{Goldenrod}Solution}
@@ -420,17 +593,17 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 
 \section{Set Theory}
 
-\begin{definition}[Set cardinality $\leq$]
+\begin{defi}[Set cardinality $\leq$]{}
 	Let $A, B$ be sets. $A$ has \navy{cardinality less than or equal to} $B$ (write $\abs{A} \leq \abs{B}$) if there exists an injection from $A$ to $B$. In notation,
 	\begin{equation}
 		\abs{A} \leq \abs{B} \iff \exists f:A \to B \text{ injective }
 	\end{equation} 
-\end{definition}
+\end{defi}
 
-\begin{theorem}[Cantor]
+\begin{theo}[Cantor]{}
 	For all sets $X$ (including infinite), $X \not\geq \pP(X)$. That is, there does not exist an injection from $\pP(X)$ to $X$. 
-\end{theorem}
-\begin{proof}
+\end{theo}
+\begin{prf}
 	The proof contains 2 steps:
 	\begin{enumerate}
 		\item Show that there is no surjection from $X$ to $\pP(X)$. 
@@ -438,39 +611,39 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 	\end{enumerate}
 
 	We start by proving (ii) through the following lemma:
-	\begin{lemma}
+	\begin{lemma}{}
 		Let $C,D$ be sets, $C \neq \emptyset$. If there is an injection $i:C \to D$, then there exists a surjection $j: D \to C$. 
 	\end{lemma}
-	\begin{proof}
+	\begin{prf}
 		
-	\end{proof}
+	\end{prf}
 	The contrapositive of this lemma gives that no surjection from $D \to C$ implies no injection from $C \to D$. 
-\end{proof}
+\end{prf}
 
-\begin{theorem}[Informal statement of the axiom of choice]
+\begin{theo}[Informal statement of the axiom of choice]{}
 	Given a family $\fF$ of nonempty sets, it is possible to pick out an element from each set in the family. 
-\end{theorem}
+\end{theo}
 
-\begin{definition}[Partial order]
+\begin{defi}[Partial order]{}
 	A \navy{partial order} is a pair $\aAA = (A, \triangleright)$ where $A \neq \emptyset$ such that  for $a,b,c \in A$
 	\begin{enumerate}
 		\item Antireflexivity: $a \triangleright a$ never happens.
 		\item Transitivity: $a \triangleright b, b \triangleright c \imp a \triangleright c$ 
 	\end{enumerate}
-\end{definition}
+\end{defi}
 \begin{remark}
 	With a partial order, you \emph{can} have incomparable elements. 
 \end{remark}
 
-\begin{example}[Partial order]
+\begin{example}[Partial order]{}
 	For any set $X$, a partial order is $(\pP(X), \subsetneq)$. For example, if $X=\Set{1,2}$, then $\Set{1}$ and $\Set{2}$ are incomparable. 
 \end{example}
 
-\begin{definition}[Maximal]
+\begin{defi}[Maximal]{}
 	Let $(A, \triangleright)$ be a partial order. Then $m \in A$ is maximal if and only if no $a \triangleright m$. 
-\end{definition}
+\end{defi}
 
-\begin{example}[Maximal elements]
+\begin{example}[Maximal elements]{}
 	The following are examples of posets and their maximal elements: 
 	\begin{enumerate}
 		\item $(\NN, <)$ has no maximal element (there is no largest natural number).
@@ -478,20 +651,20 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 	\end{enumerate}
 \end{example}
 
-\begin{definition}[Chain]
+\begin{defi}[Chain]
 	A \navy{chain} in a partial order $(A, \triangleright)$ is a $C \subseteq A$ such that $\forall a,b \in C$, $a=b$ or $a \triangleright b$ or $b \triangleright a$. (One interpretation in words, ``$C$ is linear'') 
-\end{definition}
+\end{defi}
 
-\begin{theorem}[Zorn's Lemma]
+\begin{theo}[Zorn's Lemma]{}
 	Let $(A, \triangleright)$ be a partial order such that the following condition is satisfied:
 	\begin{itemize}
 		\item[($\zZ$)] In words, if every chain has an upper bound then there is a maximal element. More precisely, ff $C$ is a chain, then $\exists x$ such that $x \triangle$
 	\end{itemize}
-\end{theorem}
+\end{theo}
 
 \section{Topological Spaces}
 
-\begin{definition}[Topology, Topological Space]
+\begin{defi}[Topology, Topological Space]{}
 	A \navy{topological space} is a pair $(X,\tT)$ where $X$ is a nonempty set and $\tT$ is a set of subsets of $X$ (called a \navy{topology}) having the following properties:
 	\begin{enumerate}
 		\item $\emptyset$ and $X$ are in $\tT$.
@@ -508,9 +681,9 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 		\end{equation}
 	\end{enumerate}
 	A set $X$ for which a topology $\tT$ has been specified is called a \navy{topological space}, that is, the pair $(X,\tT)$.
-\end{definition}
+\end{defi}
 
-\begin{example}[Examples of topologies]
+\begin{example}[Examples of topologies]{}
 The following are examples of topologies/topological spaces:
 \begin{enumerate}
 	\item The collection consisting of $X$ and $\emptyset$ is called the \navy{trivial topology} or \navy{indiscrete topology}. 
@@ -534,13 +707,13 @@ The following are examples of topologies/topological spaces:
 \end{example}
 
 
-% \begin{definition}[Open set]
+% \begin{defi}[Open set]
 % 	If $X$ is a topological space with topology $\tT$, we say that a subset $U$ of $X$ is an \navy{open set} of $X$ if $U$ belongs to the collection $\tT$.
-% \end{definition}
+% \end{defi}
 
-% \begin{definition}[Discrete Topology, Trivial Topology]
+% \begin{defi}[Discrete Topology, Trivial Topology]
 % 	If $X$ is any set, the collection of all subsets of $X$ is a topology on $X$, called the \navy{discrete topology}. The collection consisting of $X$ and $\emptyset$ is called the \navy{trivial topology}.
-% \end{definition}
+% \end{defi}
 
 % \begin{example}[Finite Complement Topology]
 % 	Let $X$ be a set. Let $\tT_f$ be the collection of all subsets of $U$ of $X$ such that $X-U$ is either finite or all of $X$. This is topology. We check the three conditions.
@@ -563,18 +736,18 @@ The following are examples of topologies/topological spaces:
 % 	\end{enumerate}
 % \end{example}
 
-\begin{definition}[(Strictly) Finer, (Strictly) Coarser, Comparable]
+\begin{defi}[(Strictly) Finer, (Strictly) Coarser, Comparable]{}
 	Suppose $\tT$ and $\tT'$ are two topologies on a given set $X$. If $\tT' \supset \tT$, we say that $\tT'$ is \navy{finer} than $\tT$. If $\tT'$ properly contains $\tT$, we say that $\tT'$ is \navy{strictly finer} than $\tT$. For these respective situations, we say that $\tT$ is \navy{coarser} or \navy{strictly coarser} than $\tT'$. We say that $\tT$ is \navy{comparable} with $\tT'$ if either $\tT' \supset \tT$ or $\tT \supset \tT'$.
-\end{definition}
+\end{defi}
 
-\begin{example}[Finest and coarsest topologies]
+\begin{example}[Finest and coarsest topologies]{}
 	For any set $X$, the finest topology is the discrete topology and the coarsest topology is the trivial topology. 
 \end{example}
 
 
 \section{Basis for a Topology}
 
-\begin{definition}[Basis, Basis Elements, Topology $\tT$ generated by $\bB$]
+\begin{defi}[Basis, Basis Elements, Topology $\tT$ generated by $\bB$]{}
 	If $X$ is a set, a \navy{basis} for a topology on $X$ is a collection $\bB \ss \pP(X)$ of subsets of $X$ (called \navy{basis elements}) such that
 	\begin{enumerate}
 		\item Every element $x \in X$ belongs to some set in $\bB$. In symbols
@@ -586,85 +759,85 @@ The following are examples of topologies/topological spaces:
 			\forall B_1,\ldots,B_n \in \bB \ \forall x \in \bigcap_{i=1}^n B_i \ \exists B \in \bB \ s.t. \ x \in B \ss \bigcap_{i=1}^n B_i 
 		\end{equation}
 	\end{enumerate}
-\end{definition}
+\end{defi}
 
-\begin{example}[Bases] The following are example of bases of topologies:
+\begin{example}[Bases]{} The following are example of bases of topologies:
 	\begin{enumerate}
 		\item $X = \RR$ and $\bB = \Set{(a,b);b>a}$. We can cover $\RR$ with open intervals. Further, a real number $x$ is contained in two intervals $B_1$ and $B_2$, then there will be an open interval $B_3$ contained in the intersection of the two intervals. In this example, we can actually set $B_3 = B_1 \cap B_2$. 
 		\item $X = \RR^2$ and $\bB = \Set{\text{interiors of circles}}$. We can cover $\RR^2$ with circles. If $x$ is in the intersection of two circles $B_1$ and $B_2$, then we can construct a circle $B_3$ contained in the intersection $B_1 \cap B_2$. Note in this example, we can just take the actual intersection, as it's not a circle. This example can also be extended to other polygons. 
 	\end{enumerate}
 \end{example}
 
-\begin{definition}[Topology $\tT$ generated by $\bB$]
+\begin{defi}[Topology $\tT$ generated by $\bB$]{}
 	If $\bB$ is a basis for a topology on $X$, then we define the \navy{topology $\tT$ generated by $\bB$} as follows: A subset $U$ of $X$ is said to be open in $X$ (that is, to be an element of $\tT$) if for each $x \in U$, there is a basis element $B_x \in \bB$ such that $x \in B_x$ and $B_x \subset U$. Note that each basis element is itself an element of $\tT$. More succinctly:
 	\begin{equation*}
 		U \ss X: U \in \tT \iff \forall x\in U \ \exists B_x \in \bB \ s.t. \ x \in B_x \ss U
 	\end{equation*}
 	
-\end{definition}
+\end{defi}
 
-\begin{theorem}[Collection $\tT$ generated by a basis $\bB$ is a topology on $X$]
-\end{theorem}
-\begin{proof}
+\begin{theo}[Collection $\tT$ generated by a basis $\bB$ is a topology on $X$]{}
+\end{theo}
+\begin{prf}
 	We check the three conditions:
 	\begin{enumerate}
 		\item The empty set is vacuously open (since it has no elements), so $\emptyset \in \tT$. Further, $X \in \tT$ since for each $x \in X$, there must be at least one basis element $B$ containing $x$, which itself is contained in $X$. 
 	\end{enumerate}
 	\improvement[inline]{Finish Proof}
-\end{proof}
+\end{prf}
 
-\begin{lemma}[Every open set in $X$ can be expressed as a union of basis elements (not unique)]
+\begin{lemma}[Every open set in $X$ can be expressed as a union of basis elements (not unique)]{}
 	Let $X$ be a set and $\bB$ a basis for a topology $\tT$ on $X$. Then $\tT$ equals the collection of all unions of elements of $\bB$. 
 \end{lemma}
-\begin{proof}
+\begin{prf}
 	We need to show two inclusions:
 	\begin{enumerate}
 		\item Collection of elements of $\bB$ in $\tT$: In the topology $\tT$ generated by $\bB$, each basis element is itself an element of $\tT$. Since $\tT$ is a topology, their union is also in $\tT$. 
 		\item Element of $\tT$ in collection of all unions of elements of $\bB$: Take $U \in \tT$. Then we know $\forall x \in U$ $\exists B_x \in \bB$ such that $x \in B_x \in U$. Then we claim that $U = \bigcup_{x \in U} B_x$, so that $U$ equals a union of elements of $\bB$. Indeed, ``$\ss$'' follows since $x \in U \implies x \in B_x$. And, ``$\supset$'' follows since $B_x \ss U$, so that the union of all such $B_x$ is in $U$.  
 	\end{enumerate}
-\end{proof}
+\end{prf}
 
-\begin{lemma}[]
+\begin{lemma}[]{}
 	Let $(X,\tT)$ be a topological space. Suppose $\cC$ is a collection of open sets of $X$ (i.e., $\cC \ss \tT$) such that for each open set $U$ of $X$ and each $x \in U$ , there is an element $V \in \cC$ such that $x \in V \ss U$. Then $\cC$ is a basis for the topology of $X$ (that is, $\cC$ is a basis \emph{and} $\cC$ generates $\tT$). In notation;
 	\begin{equation*}
 		\forall U \in \tT \ \forall a\in U \ \exists V \in \cC \ s.t. \ a \in V, V \ss U 
 	\end{equation*}
 	
 \end{lemma}
-\begin{proof}
+\begin{prf}
 	We first show that $\cC$ is indeed a basis. 
 
 	We then show $\cC$ generates $\tT$. 
 
 	\improvement[inline]{Incomplete.}
-\end{proof}
+\end{prf}
 
 
-\begin{example}[Countable bases]
+\begin{example}[Countable bases]{}
 	Let $X = \RR$ and 
 	\begin{itemize}
 		\item $\t_1$ is the usual topology.
 		\item $\t_2$ is the discrete topology. 
 	\end{itemize}
 
-	\begin{claim}
+	\begin{claim}{}
 		$\t_1$ has a countable basis.
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		We use the fact that $\QQ$ is countable. We will show that
 		\begin{equation}
 			\bB = \Set{(a,b); a<b, \ a,b \in \QQ}
 		\end{equation}
 		generates $\t_1$. Let $U \in \tT$ nonempty and take $a \in U$. Since $U$ is open, there exists an open interval $(c,d)$ with $a \in (c,d) \sse U$. Recall that $\QQ$ is dense in $\RR$. Therefore we can pick rationals $p,q$ with $c<p<a<q<d$. Then $a \in (p,q) \sse (c,d) \sse U$. Therefore $(p,q) \in \bB$ and $\bB$ is a basis for $\t_1$. $\bB$ is countable since $\QQ^2$ is countable. 
-	\end{proof}
+	\end{prf}
 
-	\begin{claim}
+	\begin{claim}{}
 		$\t_2$ doesn't have a countable basis. 
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		Suppose $\bB$ is a basis for $\t_2$. Let $a \in \RR$. We have that $\Set{a} \in \t_2$. Since $\bB$ generates $\t_2$, there must exist some $U \in \bB$ such that $a \in U \ss \Set{a}$. But then $U = \Set{a}$. Therefore we have found an injection from $\RR \to \bB:a \mapsto \Set{a}$. Therefore $\bB$ is not countable. 
 		\improvement[inline]{Clarify.}
-	\end{proof}
+	\end{prf}
 	
 	
 	
@@ -672,7 +845,7 @@ The following are examples of topologies/topological spaces:
 \end{example}
 
 
-\begin{lemma}[When is one topology finer than another?]
+\begin{lemma}[When is one topology finer than another?]{}
 	Suppose $\bB$ is a bis s for a topology $\t$ on $X$ and $\bB'$ is a basis for a topology $\t'$ on $X$. The following are equivalent:
 	\begin{enumerate}
 		\item $\t'$ is finer than $\t$ ($\t' \supset \t$). 
@@ -687,33 +860,33 @@ The following are examples of topologies/topological spaces:
 	\end{enumerate}
 \end{lemma}
 
-\begin{definition}[Subbasis]
+\begin{defi}[Subbasis]{}
 	A \navy{subbasis} for a topology on $X$ is a collection of subsets $\sS \ss \pP(X)$ of $X$ whose union equals $X$ (that is, $\bigcup \sS = X$). The topology generated by the subbasis $\sS$ is defined to be the collection $\tT$ of all unions of finite intersections of elements of $\sS$.
-\end{definition}
+\end{defi}
 
 \section{Continuous Functions}
 
-\begin{definition}[Closed]
+\begin{defi}[Closed]{}
 	A subset $A$ of a topological space $(X,\tT)$ is said to be \navy{closed} if the set $X - A \in \tT$. In words, a subset of a topological space is closed if its complement (in the space) is open. 
-\end{definition}
+\end{defi}
 
-\begin{example}[Sets can be both closed and open]
+\begin{example}[Sets can be both closed and open]{}
 	Let $(X,\tT)$ be a topological space. Then $X - X = \emptyset \in \tT$ and $X - \emptyset = X \in \tT$. Therefore $X, \emptyset$ are both closed and open. We call this type of set \navy{clopen}. Further
 	\begin{equation}
 		\text{Closed} \neq \text{Not Open}
 	\end{equation}
 \end{example}
 
-\begin{example}[Sets can be neither closed nor open]
+\begin{example}[Sets can be neither closed nor open]{}
 	Consider $\QQ$ in the usual topology on $\RR$. 
 \end{example}
 
 
-\begin{definition}[Continuous]
+\begin{defi}[Continuous]{}
 	Let $(X,\tT)$ and $(Y,\sigma)$ be topological spaces. A function $f : X \to Y$ is said to be \navy{continuous} with respect to $\tT$ and $\sigma$ if for each open subset $V$ of $Y$, the set $f^{-1}(V)$ is an open subset of $X$. In symbols, $\forall S \in \sigma$, we have that $\inv{f}(S) \in \tT$ (where $\inv{f}(S) = \Set{a \in X; f(a) \in S}$). In words, the preimage of an open set is open. 
-\end{definition}
+\end{defi}
 
-\begin{definition}[Homeomorphic]
+\begin{defi}[Homeomorphic]{}
 	The topological spaces $(X,\tT)$ and $(Y,\sigma)$ are \navy{homeomorphic} if there exists a function $f: X \to Y$ such that 
 	\begin{enumerate}
 		\item $f$ is bijective.
@@ -721,12 +894,12 @@ The following are examples of topologies/topological spaces:
 		\item $\inv{f}$ is also continuous. 
 	\end{enumerate}
 	We write $(X,\tT) \cong (Y,\sigma)$ or $f: (X,\tT) \cong (Y,\sigma)$. 
-\end{definition}
+\end{defi}
 \begin{remark}
 	This definition states that we can find a \emph{single} bijection that's continuous in both directions. 
 \end{remark}
 
-\begin{example}[Continuous functions]
+\begin{example}[Continuous functions]{}
 	Let $X$ be a set with more than one element. Let $\tT_{disc} = \pP(X)$ and $\tT_{ind} = \Set{\emptyset, X}$ (that is, the discrete and indiscrete topologies. We require $X$ to have more than one element, else these topologies would be the same). Let $f = id$ (that is $f(x) = x$). Then
 	\begin{enumerate}
 		\item $f: (X,\tT_{disc}) \to (X,\tT_{ind})$ is \textbf{continuous}. Indeed, if $S \sse X$, $S\in \tT_{ind}$, then $f^{-1}(S) \in \tT_{disc}$, since $\tT_{disc} \supset \tT_{ind}$. 
@@ -740,14 +913,14 @@ The following are examples of topologies/topological spaces:
 \end{remark}
 
 
-\begin{example}[Open, closed, continuous functions]
-	\begin{definition}[Open map]
+\begin{example}[Open, closed, continuous functions]{}
+	\begin{defi}[Open map]{}
 		$f: (X,\tT) \to (Y,\sigma)$ is an \navy{open map} if $\forall S \in \tT$ we have that $f(S) \in \sigma$ (recall $f(S) = \Set{f(s);s \in S}$). In words: open sets map to open sets. 
-	\end{definition}
+	\end{defi}
 
-	\begin{definition}[Closed map]
+	\begin{defi}[Closed map]{}
 		$f: (X,\tT) \to (Y,\sigma)$ is a \navy{closed map} if $\forall S \ss X$ such that $X - S \in \tT$ we have that $Y - f(S) \in \sigma$. In words: closed sets map to closed sets. 
-	\end{definition}
+	\end{defi}
 	
 	\textbf{Continuous, open, and closed maps don't have clean relationships.} 
 
@@ -773,10 +946,10 @@ The following are examples of topologies/topological spaces:
 		 	\begin{enumerate}
 		 	 	\item $b$ not on x-axis: Let $\e = $ distance from $b$ to x-axis. Thus $B_\e(b) \cap (\text{x-axis}) = \emptyset$, and $f(A) \ss (\text{x-axis})$. Thus $B_\e(A) \cap f(A) = \emptyset$, and $B_\e(b) \ss \RR^2 - f(A)$. 
 		 	 	\item $b$ is on x-axis: Look at $a = f^{-1}(b)$ (note: $a$ exists and is unique. $f$ is injective and  hits all of $x$-axis. Thus $b \not\in f(A) \imp a \not\in A $). Since $A$ is closed in $\RR$, if $a \not\in A$, then $\exists \e > 0$ such that $(a-\e,a+\e) \sse \RR - A$. Then 
-		 	 	\begin{claim}
+		 	 	\begin{claim}{}
 		 	 		$B_\e(b) \ss \RR^2 - f(A)$
 		 	 	\end{claim}
-		 	 	\begin{proof}
+		 	 	\begin{prf}
 		 	 		$B_\e(b) \cap (\text{x-axis}) = f((a-\e,a+\e))$. But $f((a-\e,a+\e)) \cap f(A) = \emptyset$, since $(a-\e,a+\e) \cap A = \emptyset$. Thus
 		 	 		\begin{align*}
 		 	 			B_\e(b) \cap f(A) &= B_\e(b) \cap f(A) \cap (\text{x-axis}) \\
@@ -784,7 +957,7 @@ The following are examples of topologies/topological spaces:
 		 	 			&= \emptyset
 		 	 		\end{align*}
 		 	 		
-		 	 	\end{proof}
+		 	 	\end{prf}
 		 	 	
 		 	 \end{enumerate} 
 		 \end{enumerate}
@@ -793,9 +966,9 @@ The following are examples of topologies/topological spaces:
 
 \section{Subspace Topology}
 
-\begin{definition}[Subspace topology]
+\begin{defi}[Subspace topology]{}
 	Given a topological space $(X,\tT)$ and a non-empty set $A \sse X$, the \navy{subspace topology on $A$ induced (or given) by $\tT$} is $(A, \t_A)$ where $\tT_A = \Set{U \cap A; U \in \tT}$. 
-\end{definition}
+\end{defi}
 
 \begin{figure}[H]
 	\begin{center}
@@ -808,7 +981,7 @@ The following are examples of topologies/topological spaces:
 \end{remark}
 
 
-\begin{proof}[Proof that $(A, \t_A)$ is a topological space]
+\begin{prf}[Proof that $(A, \t_A)$ is a topological space]
 	We check the axioms:
 	\begin{enumerate}
 		\item $\emptyset \in \tT_A$: $\emptyset \in \tT$, and $\emptyset \cap A = \emptyset$, so $\emptyset \in \tT_A$. 
@@ -819,30 +992,30 @@ The following are examples of topologies/topological spaces:
 		\end{equation}
 		But $C_1 \cap C_2 \in \tT$ since $\tT$ is a topology, therefore $B_1 \cap B_2$ can be written as the intersection of a set in $\tT$ and $A$, so that $B_1 \cap B_2 \in \t_A$. 
 	\end{enumerate}
-\end{proof}
+\end{prf}
 
-\begin{claim}[Inclusion is Continuous]
+\begin{claim}[Inclusion is Continuous]{}
 	If $(X,\t)$ is a topological space and $A \sse X$, then $f:A \to X:a \mapsto a$ is continuous (with respect to $\t_A$ and $\tau$).
 \end{claim}
-\begin{proof}
+\begin{prf}
 	Let $U \in \t$. Then $\inv{f}(U) = U \cap A$. Therefore $\inv{f}(U) \in \t_A$ by the definition of the subspace topology. 
-\end{proof}
+\end{prf}
 
-\begin{claim}[]
+\begin{claim}[]{}
 	Let $(X,\t)$ and $(Y,\sigma)$ be topological spaces and $f: X\to Y$ be a continuous function (with respect to $\t$ and $\sigma$). Let $A \ss X$ be nonempty and $\t_A$ its subspace topology. Let $B \ss Y$ be nonempty and $\sigma_B$ its subspace topology. Suppose further that $f(A) \sse B$ (that is, for $x \in A$, we have that $f(x) \in B$). Define $\hat f: A\to B: x \mapsto f(x)$ (that is, the restriction of $f$). \textbf{Then} $\hat f: A \to B$ is continuous (with respect to $\t_A$ and $\t_B$). 
 \end{claim}
-\begin{proof}
+\begin{prf}
 	Let $U \ss B$ be $\sigma_B$-open. Then there exists a $W \in \sigma$ such that $U = B \cap W$. Since $f$ is continuous, $\inv{f}(W) \in \t$.  But then $\inv{f}(W) \cap A \in \t_A$ and $\inv{f}(W) \cap A = \inv{f}(U)$. 
 
 	\improvement[inline]{Incomplete}
-\end{proof}
+\end{prf}
 
 
 
 
 \subsection{Connectedness}
 
-\begin{definition}[Connected]
+\begin{defi}[Connected]{}
 	A space $(X,\t)$ is \navy{connected} if whenever sets $V,W$ are
 	\begin{enumerate}
 		\item Nonempty
@@ -850,13 +1023,13 @@ The following are examples of topologies/topological spaces:
 		\item $V \cup W = X$
 	\end{enumerate}
 	we have $V \cap W \neq \emptyset$. 
-\end{definition}
+\end{defi}
 
 \begin{remark}
 	Equivalently, a set is connected if and only the only clopen sets are $\emptyset, X$. 
 \end{remark}
 
-\begin{example}[Connected Set]
+\begin{example}[Connected Set]{}
 	Let $(X,\t) = (\RR,\t_e)$ and $A = (0,1) \cup (1,2)$. Notice that
 	\begin{enumerate}
 		\item $(0,1) \in \t_A$ since $(0,1) = (0,1) \cap A$ and $(0,1) \in \t_e)$. 
@@ -869,7 +1042,7 @@ The following are examples of topologies/topological spaces:
 
 \section{Metric Spaces}
 
-\begin{definition}[Metric space]
+\begin{defi}[Metric space]{}
 	A \navy{metric space} is a nonempty set $X$ together with a binary function $d : X\times X \to \RR$ which satisfies the following properties: For all $x,y,z \in X$ we have that
 	\begin{enumerate}
 		\item Positivity: $d(x,y) \geq 0$
@@ -877,44 +1050,44 @@ The following are examples of topologies/topological spaces:
 		\item Symmetry: $d(x,y) = d(y,x)$
 		\item Triangle inequality: $d(x,y) + d(y,z) \geq d(x,z)$
 	\end{enumerate}
-\end{definition}
+\end{defi}
 
-\begin{definition}[Metric topology]
+\begin{defi}[Metric topology]{}
 	Given a metric space $(X,d)$, the set $\bB = \Set{B_\e(x); \e > 0, x \in X}$ is a basis for a topology on $X$ (where $B_\e(x) = \Set{y \in X; d(x,y) < \e}$) called the \navy{metric topology}.
-\end{definition}
+\end{defi}
 
-\begin{definition}[Open Set in Metric Topology]
+\begin{defi}[Open Set in Metric Topology]{}
 	A set is \navy{open} in the metric topology induced by $d$ if and only if for each $y \in U$ there is a $\d > 0$ such that $B_d(y, \d) \ss U$.
-\end{definition}
+\end{defi}
 
 
 
 
-\begin{theorem}[``Continuous'' $=$ ``Continuous'']
+\begin{theo}[``Continuous'' $=$ ``Continuous'']{}
 	If $(X_1,d_1)$ and $(X_2,d_2)$ are metric spaces with induced topologies $\t_{d_1}$ and $\t_{d_2}$, then for $f: X_1 \to X_2$, the following are equivalent:
 	\begin{enumerate}
 		\item $f$ is continuous with respect to $\t_{d_1}$ and $\t_{d_2}$.
 		\item For all $a \in X_1$ and $\e > 0$, there exists a $\d > 0$ such that for all $b \in X_1$ for which $d_1(a,b) < \d$, we have that $d_2(f(a),f(b)) < \e$. 
 	\end{enumerate}
-\end{theorem}
-\begin{proof} 
+\end{theo}
+\begin{prf} 
 	$(i) \imp (ii)$:
 	
 	\improvement[inline]{Incomplete.}
-\end{proof}
+\end{prf}
 
 \subsection{Special Properties and Maps}
 
-\begin{definition}[$T_2$, Hausdorff]
+\begin{defi}[$T_2$, Hausdorff]{}
 	$(X,\t)$ is \navy{$T_2$ (Hausdorff)} if for every distinct $a,b \in X$, there exist open sets $V,W \in \t$ such that $a \in V$, $b \in W$, and $V \cap W = \emptyset$.
-\end{definition}
+\end{defi}
 
-\begin{theorem}[Separation Axiom]
+\begin{theo}[Separation Axiom]{}
 	Metric spaces are always $T_2$. 
-\end{theorem}
-\begin{proof}
+\end{theo}
+\begin{prf}
 	Let $\e = \frac{d(a,b)}{2}$. Then let $V=B_\e(a)$ and $W = B_\e (b)$.
-\end{proof}
+\end{prf}
 
 \begin{remark}
 	Not all topological spaces are $T_2$.
@@ -922,17 +1095,17 @@ The following are examples of topologies/topological spaces:
 
 \section{Sequences}
 
-\begin{definition}[Converges]
+\begin{defi}[Converges]{}
 	Fix a topological space $(X,\tT)$. A sequence of points $(a_i)_{i \in \NN} \ss X$ \navy{converges} to $b \in X$ if for every open set $W$ containing $b$, all but finitely many of the terms of the sequence are in $W$. In symbols
 	\begin{equation*}
 		(a_i)_{i \in \NN} \to b \iff \forall W\in \tT \text{ s.t. } b \in W, \exists N \in \NN \text{ s.t. } \forall m > n, a_m \in W
 	\end{equation*}
 	
-\end{definition}
+\end{defi}
 
-\begin{definition}[Sequentially closed]
+\begin{defi}[Sequentially closed]{}
 	A set $S \ss X$ is \navy{sequentially closed} if for every sequence $(a_i)_{i \in \NN}$ of points in $S$ converging to some $b \in X$, we have $b \in S$. 
-\end{definition}
+\end{defi}
 
 \textbf{How do sequentially closed and closed sets relate?}
 \begin{itemize}
@@ -942,19 +1115,19 @@ The following are examples of topologies/topological spaces:
 
 \textbf{How bad can convergence be in an arbitrary topological space? Pretty bad.}
 
-\begin{example}[Every sequence converges to every point]
+\begin{example}[Every sequence converges to every point]{}
 	Let $X$ be a set with at least 2 points and $\tT$ be the indiscrete (or trivial) topology (note: $|X| = 1$ isn't that interesting since every sequence in $X$ would then be constant and hence convergent). Let $(a_i)_{i \in \NN}$ be a sequence of points in $X$ and fix a point $b \in X$.
 
-	\begin{claim}[]
+	\begin{claim}[]{}
 		$(a_i)_{i \in \NN} \to b$ 
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		Let $U \ss X$ such that $b \in U$ and $U \in \tT$. Since $b \in U$, we have that $U \neq \emptyset$, so that the only possibility is that $U = X$ (since $\tT = \Set{\emptyset,X}$). But then $U$ contains all elements of the sequence  $(a_i)_{i \in \NN}$. Thus $(a_i)_{i \in \NN}$ converges to $b$. Since $b$ was arbitrary, $(a_i)_{i \in \NN}$ converges to every point of $X$.
-	\end{proof}
+	\end{prf}
 	
 \end{example}
 
-\begin{example}[Every sequence converges to exactly one point or doesn't converge, or converges to everything]
+\begin{example}[Every sequence converges to exactly one point or doesn't converge, or converges to everything]{}
 	Let $(X,\tT)$ be the cofinite topology (on an infinite set $X$). For simplicity, let $X = \NN$. Let $(a_i)_{i \in \NN}$ be a sequence of points in $X$. We can divide the possible forms of $(a_i)_{i \in \NN}$ into 3 cases:
 	\begin{enumerate}
 		\item No infinite repetition of any terms (ex. $(1,2,3,4,\ldots)$).
@@ -968,22 +1141,22 @@ The following are examples of topologies/topological spaces:
 		\item Doesn't converge.
 	\end{enumerate}
 
-	\begin{claim}[]
+	\begin{claim}[]{}
 		A sequence with no infinite repetition converges to every point.
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		 Let $a=(a_i)_{i \in \NN}$ be a sequence in $X$ with no infinite repetition and let $b \in X$. Let $b \in U$ where $U \in \tT$ ($U$ open). Note that $U \neq \emptyset$. Thus $U$ is cofinite (that is, $X-U$ is finite, so that finitely many points of $X$ are \emph{not} in $U$). Therefore each point not in $U$ only appears finitely many times in the sequence (since there is no infinite repetition in $a$). Therefore only finitely many of the terms of $a$ are not in $U$ (finite $\times$ finite = finite). Therefore the sequence converges to $b$. 
-	\end{proof}
+	\end{prf}
 	
 	
 \end{example}
 
 
 
-\begin{claim}[Metric space: closed $\iff$ sequentially closed]
+\begin{claim}[Metric space: closed $\iff$ sequentially closed]{}
 	In a metric space, a set is closed if and only if it is sequentially closed. More formally: If $(X,d)$ is a metric space and $\tT_d$ is the induced topology on $X$, then $S \ss X$ is sequentially closed if and only if $S$ is closed (with respect to $\tT$, that is $X-S \in \tT$). 
 \end{claim}
-\begin{proof}[Closed $\imp$ sequentially closed]
+\begin{prf}[Closed $\imp$ sequentially closed]
 	Suppose (for contradiction) that $A \ss X$, $A$ closed, but $A$ not sequentially closed. Since $A$ is not sequentially closed, there is a sequence of points  $(a_i)_{i \in \NN}$ from $A$ and a point $b \in X - A$ such that $(a_i)_{i \in \NN} \to b$.  
 
 	$A$ closed means $X- A$ is open. So since $b \in X-A$, there is some $U \in \tT_d$ with $b \in U$ such that $U \cap A = \emptyset$. Of course, $U = X - A$ works. But, we can find a basic open (i.e., a set in the basis we're using, here the set of open balls). Since $b \in X-A$ and $X-A$ open, there exists $\e> 0$ such that $B_\e(b) \ss X-A$. Thus we have that
@@ -993,21 +1166,21 @@ The following are examples of topologies/topological spaces:
 		\item $B_\e(b)$ contains none of the terms of  $(a_i)_{i \in \NN}$ (since $a_i \in A$ for all $i$). 
 	\end{enumerate}
 	But then  $(a_i)_{i \in \NN} \not\to b$, a contradiction.
-\end{proof}
+\end{prf}
 
 \section{Product Topology}
-\begin{definition}[Product topology, two sets]
+\begin{defi}[Product topology, two sets]
 	Let $(X,\t)$ and $(Y,\sigma)$ be topological spaces. The \navy{product topology} on $X \times Y$ is the topology having as \emph{basis} the collection $\bB$ of all set of the form $U \times V$ where $U$ is an open subset of $X$ and $V$ is an open subset of $Y$. In symbols,
 	\begin{equation}
 		\bB_{\t \times \sigma} = \Set{U \times V; U \in \t, V \in \sigma}
 	\end{equation}
-\end{definition}
+\end{defi}
 
 \begin{remark}
 	Note, open sets of $X \times Y$ need not be of the form open set in X $\times$ open set in $Y$. 
 \end{remark}
 
-\begin{proof}[Proof that $\bB_{\t \times \sigma}$ is indeed a basis for a topology on $X \times Y$]
+\begin{prf}[Proof that $\bB_{\t \times \sigma}$ is indeed a basis for a topology on $X \times Y$]
 	We check the two conditions required to be a basis:
 	\begin{enumerate}
 		\item $\bB$ ``covers'' $X$: Note that $X \in \t$ and $Y \in \sigma$ (since they are each topologies). Therefore $X \times Y \in \bB$. Thus for any $(x,y) \in X \times Y$, we have that $(x,y) \in X \times Y \in \bB$.
@@ -1017,36 +1190,36 @@ The following are examples of topologies/topological spaces:
 		\end{equation}
 		But then $U_1 \cap U_2 \in \t$ and $V_1 \times V_2 \in \sigma$, so that $(U_1 \times V_1) \cap (U_2 \times V_2)  \in\bB$, so the intersection of two basis elements is again a basis element. This is stronger than the property required to be a basis, yet of course sufficient.
 	\end{enumerate}
-\end{proof}
+\end{prf}
 
-\begin{definition}[Product space/topology for finitely many spaces]
+\begin{defi}[Product space/topology for finitely many spaces]{}
 	Let $(X_1,\t_1), \ldots, (X_n,\t_n)$ be topological spaces. The set of points of the \navy{product space} is $X_1 \times \cdots \times X_n$. The basis for the \navy{product topology} is
 	\begin{equation}
 		\bB_{\t_1 \times \cdots \times \t_n} = \Set{W_1 \times \cdots \times W_n; W_i \in \t_i}
 	\end{equation}
-\end{definition}
+\end{defi}
 
 \begin{remark}
 	Again, $\bB_{\t_1 \times \cdots \times \t_n}$ is indeed a basis since the first condition is trivially satisfied ($X_1 \times \cdots \times X_n$ is a basis element) and the intersection of products is a product of intersections, and hence again a basis element.
 \end{remark}
 
-\begin{definition}[Projection Maps]
+\begin{defi}[Projection Maps]{}
 	Let $(X_1,\t_1)$ and $(X_2,\t_2)$ be topological spaces. Let
 	\begin{align*}
 		&\pi_1:X_1 \times X_2 \to X_1 : (x_1,x_2) \mapsto x_1 \\
 		&\pi_2:X_1 \times X_2 \to X_2 : (x_1,x_2) \mapsto x_2
 	\end{align*}
 	then $\pi_1$ and $\pi_2$ are \navy{projection maps}. 
-\end{definition}
+\end{defi}
 
-\begin{claim}[]
+\begin{claim}[]{}
 	Let $\pi_1$ be $\pi_2$ projection maps (as above). Then
 	\begin{enumerate}
 		\item $\pi_1$ is continuous with respect to $\t_1 \otimes \t_2$ and $\t_1$.
 		\item $\pi_2$ is continuous with respect to $\t_1 \otimes \t_2$ and $\t_2$.
 	\end{enumerate}
 \end{claim}
-\begin{proof}
+\begin{prf}
 	We show $\pi_1$ is continuous. Suppose $S \ss X_1$ is open (i.e., $\in \t_1$). We want to show that $\pi^{-1}(S) \in \t_1 \otimes \t_2$. We have that
 	\begin{align*}
 		\pi_1^{-1}(S) &= \Set{p \in X_1 \times X_2; \pi_1(p) \in S} \\
@@ -1061,10 +1234,10 @@ The following are examples of topologies/topological spaces:
 	\end{itemize}
 	so that $S \times X_2$ is in our basis for $\t_1 \otimes \t_2$. Thus, $S \times X_2 \in \t_1 \otimes \t_2$.
 	
-\end{proof}
+\end{prf}
 
 
-\begin{example}[Projection Maps]
+\begin{example}[Projection Maps]{}
 	Take $(X_1,\t_1) = (X_2,\t_2) = (\RR, \t_e)$. Take $S \ss \RR^2$ to be the unit ball: $S = \Set{(x,y);x^2 + y^2 <1}$. Observe that
 	\begin{equation}
 		\pi_1(S) = \pi_2(S) = (-1,1)
@@ -1074,15 +1247,15 @@ The following are examples of topologies/topological spaces:
 
 \section{Compactness}
 
-\begin{definition}[Open cover]
+\begin{defi}[Open cover]{}
 	An \navy{open cover} of $(X,\t)$ is a family of $\t$-open sets $\cC \ss \t$ such that $\bigcup \cC = X$. 
-\end{definition}
+\end{defi}
 
 \begin{remark}
 	The notation $\bigcup \cC = X$ means $X$ is the union of ``stuff'' in $\cC$. 
 \end{remark}
 
-\begin{example}[Open covers]
+\begin{example}[Open covers]{}
 	The following are examples of open covers of $(X,\t)$:
 	\begin{enumerate}
 		\item Any basis for $\t$ is an open cover of $(X,\t)$. 
@@ -1093,21 +1266,21 @@ The following are examples of topologies/topological spaces:
 	\end{enumerate}
 \end{example}
 
-\begin{definition}[Subcover]
+\begin{defi}[Subcover]{}
 	$\dD$ is a \navy{subcover} of $\cC$ if
 	\begin{enumerate}
 		\item $\dD \ss \cC$.
 		\item $\dD$ is an open cover.  
 	\end{enumerate}
 	A \navy{finite subcover} is a subcover which is finite.
-\end{definition}
+\end{defi}
 
 
-\begin{definition}[Compact]
+\begin{defi}[Compact]{}
 	A topological space $(X,\t)$ is \navy{compact} if every open cover has a finite subcover. 
-\end{definition}
+\end{defi}
 
-\begin{example}[Non-compact Set]
+\begin{example}[Non-compact Set]{}
 	Consider the topological space $(\RR,\t_e)$. This space has a finite subcover: $\{\RR\}$. But does this imply that $(\RR,\t_e)$ is compact? No! We need to see if \emph{all} open covers have finite subcovers. Consider the open cover
 	\begin{equation}
 		\cC = \Set{(-n,n); n \in \NN}
@@ -1121,9 +1294,9 @@ The following are examples of topologies/topological spaces:
 
 \improvement[inline]{Incomplete.}
 
-\begin{theorem}[Bounded Value Theorem (BVT)]
+\begin{theo}[Bounded Value Theorem (BVT)]{}
 	If $f:[0,1]\to \RR$ is continuous, then $\range{f}$ is bounded (above and below).
-\end{theorem}
+\end{theo}
 
 \subsubsection{Cantor Space}
 
@@ -1133,12 +1306,12 @@ Cantor space $\cC$ has
 	\item Open sets are generated by finite strings: $U \ss \cC$ is open if and only if for all $f \in U$, there exists a finite binary string $\sigma$ such that every infinite binary sequence beginning with $\sigma$ is in $U$.   
 \end{itemize}
 
-\begin{theorem}[]
+\begin{theo}[]{}
 	The Cantor Space $\cC$ is compact. 
-\end{theorem}
-\begin{proof}
+\end{theo}
+\begin{prf}
 	
-\end{proof}
+\end{prf}
 
 
 
@@ -1146,10 +1319,10 @@ Cantor space $\cC$ has
 
 \subsection{Creating New Compact Spaces from Old}
 
-\begin{theorem}[``Continuous images'' of compact spaces are compact]
+\begin{theo}[``Continuous images'' of compact spaces are compact]{}
 	Suppose $(X,\t)$ is compact and $f:(X,\t) \to (Y,\sigma)$ is continuous and surjective (that is, $Y = \im f$). Then $(Y,\sigma)$ is compact. 
-\end{theorem}
-\begin{proof}
+\end{theo}
+\begin{prf}
 	Let $\uU$ be an open cover of $Y$. We must show there exists a finite subcover. For $U \in \uU$ Let $W_U = \inv{f}(U)$. $W_U$ is open since $f$ is continuous and $U \in \sigma$ (open in $Y$). Then $\Set{W_U: U \in \uU}$ covers $X$. To see this, take $x \in X$. Then $f(x) \in Y$, so that there exists some $U \in \uU$ containing $f(x)$. But then $x \in \inv{f}(U) = W_u$. $(X,\t)$ is compact, so $\Set{W_U: U \in \uU}$ has a finite subcover: $\Set{W_{U_i}}_{i=1}^n$. $f$ is surjective, so 
 	\begin{equation}
 		\bigcup_{i=1}^n f(W_{U_i}) = \bigcup_{i=1}^n U_i = Y
@@ -1157,21 +1330,21 @@ Cantor space $\cC$ has
 	is a finite subcover of $Y$. 
 
 	\textbf{Proof summary:} ``Pull back (continuity), push forward (surjectivity).''
-\end{proof}
+\end{prf}
 
-\begin{corollary}
+\begin{corollary}{}
 	$[0,1]$ is compact. 
 \end{corollary}
-\begin{proof}
+\begin{prf}
 	Use the map from cantor space $\cC$ to $[0,1]$ that is the binary expansion. That is, $\cC \to [0,1] : f \mapsto f(1)f(2)f(2)\ldots$ in binary. This is a continuous surjection, and $\cC$ is compact, so that by the above theorem, $[0,1]$ is compact. 
-\end{proof}
+\end{prf}
 
 
 
-\begin{theorem}[Closed subspaces of compact spaces are compact]
+\begin{theo}[Closed subspaces of compact spaces are compact]{}
 	If $(X,\t)$ is compact and $A \sse X$ is closed, then $(A,\t_A)$ is compact. 
-\end{theorem}
-\begin{proof}
+\end{theo}
+\begin{prf}
 	Let $\uU$ be an open cover of $A$. Using the definition of the subspace topology, we can write each $U \in \uU$ as $U = V_U \cap A$ where $V_U \in \t$. Since $A$ is closed, we have that $X-A$. Therefore we can form an open cover of $X$ by
 	\begin{equation}
 		\hat\uU = \Set{V_U: U \in \uU} \cup \Set{X-A}
@@ -1181,23 +1354,23 @@ Cantor space $\cC$ has
 		A \sse \bigcup_{i=1}^n U_i
 	\end{equation}
 	is a finite subcover of $A$. Therefore every open cover of $A$ has a finite subcover, so $A$ is compact. 
-\end{proof}
+\end{prf}
 
-\begin{theorem}[Finite Tychonoff]
+\begin{theo}[Finite Tychonoff]{}
 	Suppose $(X,\t)$ and $(Y,\sigma)$ are compact spaces. Then their product $(X\times Y, \t \otimes \sigma)$ is compact. This also holds for $n$ spaces with $n < \infty$. 
-\end{theorem}
-\begin{proof}
+\end{theo}
+\begin{prf}
 	We prove the case of $n=2$.
 	\improvement[inline]{Incomplete.}
-\end{proof}
+\end{prf}
 
-\begin{example}[Example of Finite Tychonoff]
+\begin{example}[Example of Finite Tychonoff]{}
 	The closed unit cube $[0,1]\times[0,1] \times [0,1]$ is compact. 
 \end{example}
 
 \subsection{Tychonoff's Theorem}
 
-\begin{definition}[Cartesian Product (Possibly Infinite)]
+\begin{defi}[Cartesian Product (Possibly Infinite)]{}
 	Let $\Set{X_i}_{i\in I}$ be a family of sets, where $I$ is an arbitrary index set. The \navy{Cartesian product} $\prod_{i \in I} X_i$ is the set of all functions $f$ such that
 	\begin{enumerate}
 		\item $f: I \to \cup_{i \in I} X_i$ 
@@ -1207,11 +1380,11 @@ Cantor space $\cC$ has
 	\begin{equation}
 		\prod_{i \in I} X_i = \Set{f: I \to \cup_{i \in I} X_i; f(i) \in X_i) \forall i \in I}
 	\end{equation}
-\end{definition}
+\end{defi}
 
 \improvement[inline]{Figure.}
 
-\begin{example}[Finite Cartesian Product]
+\begin{example}[Finite Cartesian Product]{}
 	Let's check that this definition agrees with the standard notion of a finite Cartesian product. 
 
 	Let $I = \Set{1,2}$. The point $p = (a,b) \in X_1 \times X_2$ corresponds to the function
@@ -1226,7 +1399,7 @@ Cantor space $\cC$ has
 	\end{equation}
 \end{example}
 
-\begin{definition}[Product Space]
+\begin{defi}[Product Space]{}
 	Let $I$ be an arbitrary index set. Suppose for each $i \in I$ we have that $(X_i, \t_i)$ is a topological space. Their \navy{product space} has
 	\begin{itemize}
 		\item Underlying set:
@@ -1252,19 +1425,19 @@ Cantor space $\cC$ has
 			\improvement[inline]{What does this mean?}
 		\end{itemize}
 	\end{itemize}
-\end{definition}
+\end{defi}
 
-\begin{theorem}[Full Tychonoff]
+\begin{theo}[Full Tychonoff]{}
 	Suppose $(X_i,\t_i)$ is compact for all $i \in I$. Then the space 
 	\begin{equation}
 		\parens{\prod_{i \in I} X_i, \bigotimes_{i \in I} \t_i}
 	\end{equation}
 	is compact. 
-\end{theorem}
+\end{theo}
 
 \subsubsection{Ultrafilters}
 
-\begin{definition}[Ultrafilter]
+\begin{defi}[Ultrafilter]{}
 	Suppose $I$ is an set (wlog infinite). An \navy{ultrafilter $\UU$} on $I$ is a family of subsets of $I$ such that:
 	$\UU$ is a filter:
 	\begin{enumerate}
@@ -1276,9 +1449,9 @@ Cantor space $\cC$ has
 	\begin{enumerate}
 		\item[(iv)] $\forall A \sse I$, $A \in \UU$ or $I - A \in \UU$ (but not both, by (i) and (iii))
 	\end{enumerate}
-\end{definition}
+\end{defi}
 
-\begin{example}[Frechet Filter]
+\begin{example}[Frechet Filter]{}
 	Recall that a set is cofinite if its complement is finite. 
 	Then
 	\begin{equation}
@@ -1303,7 +1476,7 @@ Cantor space $\cC$ has
 	\end{enumerate}
 \end{example}
 
-\begin{example}[Principal filter]
+\begin{example}[Principal filter]{}
 	Suppose $I = \NN$. The set
 	\begin{equation}
 		\fF = \Set{\text{all sets containing } 7}
@@ -1323,23 +1496,23 @@ Cantor space $\cC$ has
 	\end{enumerate}
 \end{example}
 
-\begin{definition}[Principal ultrafilter]
+\begin{defi}[Principal ultrafilter]
 	\navy{Principal ultrafilters} take the form
 	\begin{equation}
 		\angles{a} = \Set{A \sse I: a \in A} \qquad \text{ for some } a \in I
 	\end{equation}
-\end{definition}
+\end{defi}
 
 
-\begin{example}[Frechet filter is not an ultrafilter]
+\begin{example}[Frechet filter is not an ultrafilter]{}
 	For a concrete example, let $I = \NN$, $A = \Set{\text{evens}} \ss I$. But $A \not\in \UU$ and $I-A\not\in\UU$.  
 \end{example}
 
-\begin{example}[Principal filters are ultrafilters]
+\begin{example}[Principal filters are ultrafilters]{}
 	Consider $I = \NN$. Let $A \sse \NN$. Then $7 \in A$ or $7 \in \NN - A$. 
 \end{example}
 
-\begin{example}[Interpretation of non-principal ultrafilter]
+\begin{example}[Interpretation of non-principal ultrafilter]{}
 	Think of a game of $\infty$-questions. The premise of the game: I have $n \in \NN$, and you want to find it. Example questions:
 	\begin{center}
 		\begin{tabular}{l|l}
@@ -1372,30 +1545,30 @@ Cantor space $\cC$ has
 	This ultrafilter is non-principal: We never say yes to a specific number. 
 \end{example}
 
-\begin{definition}[Finite intersection property (FIP)]
+\begin{defi}[Finite intersection property (FIP)]{}
 	A collection of subsets $\fF$ of $I$ has \navy{FIP} if whenever $A_1,\ldots,A_n \in \fF$ we have $\bigcap_{i=1}^n A_i \neq \emptyset$. 
-\end{definition}
+\end{defi}
 
-\begin{corollary}
+\begin{corollary}{}
 	There exist non-principal ultrafilers. 
 \end{corollary}
-\begin{proof}
+\begin{prf}
 	Let $I$ be an infinite set and let $\fF$ be the Frechet filter on $I$. Filters have FIP by properties (i) (contains the entire set and \emph{doesn't} contain the empty set) and (iii) (closed under finite intersections). Indeed, since the finite intersection of any elements of $\fF$ must be in $\fF$, and the empty set is not in $\fF$, filters have FIP. By Theorem \ref{thm:fipextension}, there exists an ultrafilter $\UU$ such that $\UU \supseteq \fF$. 
 
-	\begin{claim}
+	\begin{claim}{}
 		$\UU$ is non-principal. 
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		Suppose that $\UU$ were principal. Then by definition $\Set{a} \in \UU$ for some $a \in I$. But $I - \Set{a}$ is cofinite. Therefore $I - \Set{a} \in \fF \sse \UU$. This already contradicts property (iv) (the ultra condition). We also have a contradiction to (i) (doesn't contain the empty set). Indeed, $(I - \Set{a}) \cap \Set{a} = \emptyset \in \UU$, since $\UU$ is closed under finite intersections. 
-	\end{proof}
+	\end{prf}
 	
 	Therefore, extending the Frechet filter gives us a non-principal ultrafilter. 
-\end{proof}
+\end{prf}
 
-\begin{theorem}[FIP $\imp$ ultrafilter extension]\label{thm:fipextension}
+\begin{theo}[FIP $\imp$ ultrafilter extension]{}\label{thm:fipextension}
 	If $\fF$ has FIP, then there exists an ultrafilter $\UU$ extending $\fF$. That is, $\exists \UU$ such that $\UU \supseteq \fF$. 
-\end{theorem}
-\begin{proof}
+\end{theo}
+\begin{prf}
 	Define a partial order as follows: let \[\PP = \Set{ \text{ set of subsets of I which (i) have FIP and (ii) are supersets of $\fF$}}\] 
 	Formally
 	\begin{equation}
@@ -1403,20 +1576,20 @@ Cantor space $\cC$ has
 	\end{equation}
 	The partial order $\triangleleft$ is $\subsetneq$. 
 
-	\begin{example}[]
+	\begin{example}[]{}
 		Even/Odd
 
 		\improvement[inline]{Don't understand this example.}
 	\end{example}
 
-	\begin{claim}
+	\begin{claim}{}
 		Chains in $\PP$ have upper bounds. 
 	\end{claim}
 	\begin{remark}
 		With this claim, we can apply Zorn's lemma. We will showing the the maximal elements of $\PP$ (which exist by Zorn) are ultrafilters containing $\fF$.
 	\end{remark}
 	
-	\begin{proof}
+	\begin{prf}
 		Let $\cC \sse \PP$ be a chain (thus any two elements are comparable). Define
 		\begin{equation}
 			\dD = \bigcup \cC 
@@ -1430,7 +1603,7 @@ Cantor space $\cC$ has
 				\item $\dD$ has FIP: Let $A_1,\ldots,A_n \in \dD$. These sets must come from elements of $\cC$. Thus there exist $C_1,\ldots,C_n \in \cC$ such that $A_1 \in C_1$, $\ldots$, $A_n \in C_n$. Since $\cC$ is a chain, one of $C_1,\ldots,C_n$ must contain the others. WLOG say $C_n$ contains the others. Then $A_1,\ldots,A_n \in C_n$. $C_n \in \PP$, so $C_n$ has FIP. Therefore $A_1 \cap \cdots \cap A_n \neq \emptyset$. 
 			\end{enumerate}
 		\end{enumerate}
-	\end{proof}
+	\end{prf}
 	
 	By Zorn's lemma, we get a $\UU \in \PP$ maximal element. We show that $\UU$ is an ultrafilter. First show $\UU$ is a filter:
 	\begin{enumerate}
@@ -1460,49 +1633,49 @@ Cantor space $\cC$ has
 		Z = X_1\cap\cdots\cap X_m \cap Y_1\cap\cdots\cap Y_n = \emptyset
 	\end{equation}
 	This shows that $\UU$ doesn't have FIP, which is a contradiction. 
-\end{proof}
+\end{prf}
 
 \subsection{Ultrafilters in Topology}
 
-\begin{definition}[Ultrafilter convergence]
+\begin{defi}[Ultrafilter convergence]{}
 	Suppose $(X,\t)$ is a topological space and $\UU$ is an ultrafilter on $X$. Then $\UU$ \navy{converges} to $\alpha$ (and we write $\UU \to \alpha$) for $\alpha \in X$ if every open set containing $\alpha$ is in $\UU$. In symbols
 	\begin{equation}
 		\UU \to \alpha \iff \forall V_\alpha \in \t : \alpha \in V_\alpha, V_\alpha \in \UU
 	\end{equation}
-\end{definition}
+\end{defi}
 
 
-\begin{theorem}[]
+\begin{theo}[]{}
 	TFAE
 	\begin{enumerate}
 		\item $(X,\t)$ is compact.
 		\item Every ultrafilter on $X$ converges to some point. 
 	\end{enumerate}
-\end{theorem}
+\end{theo}
 
-\begin{proof}[Proof that (i) implies (ii)]
+\begin{prf}[Proof that (i) implies (ii)]
 	Prove the \textbf{contrapositive}. Suppose $(X,\t)$ is not compact. Let $\cC$ be an open cover with no finite subcover. We want to demonstrate/construct a non-convergent ultrafilter on $X$. Clearly, this ultrafilter can't be principal (since then every set in the principal ultrafilter contains a special point, so the ultrafilter trivially converges to this point). We will use the ultrafilter extension lemma: that is, we will construct a filter $\fF$ with FIP, so that we have an ultrafilter extending $\fF$. Let
 	\begin{equation}
 		\fF = \Set{X - A; A \in \cC}
 	\end{equation}
 
-	\begin{claim}[]
+	\begin{claim}[]{}
 		$\fF$ has FIP (and is a filter). 
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		$\fF$ is the Frechet filter. Proof of FIP by \textbf{contradiction}. Suppose there exists a finite collection of sets $\Set{B_i}_{i=1}^n \sse \fF$ such that $\bigcap_{i=1}^n B_i = \emptyset$. But then
 		\begin{align*}
 			X &= X - \bigcap_{i=1}^n B_i \\
 			&= \bigcup_{i=1}^n (X - B_i)
 		\end{align*}
 		By assumption, since $B_i \in \fF$, we have that $X - B_i \in \cC$. Therefore we have demonstrated a finite subcover of $\cC$ (of $X$), which contradicts that $\cC$ has no finite subcover.  
-	\end{proof}
+	\end{prf}
 
 	Thus by the ultrafilter extension lemma, there exists an ultrafilter $\UU$ on $X$ such that $\UU \supseteq \fF$. We want to show $\UU$ doesn't converge, so we must show $\forall \alpha \in X$, $\exists V_\alpha \in \t$ such that $V_\alpha \not\in \UU$. To show this, fix an $\alpha \in X$. Since $\cC$ is a cover, $\exists A_\alpha \in \cC$ such that $\alpha \in A_\alpha$. But then by construction $X - A_\alpha \in \fF \sse \UU$. Thus $A \not\in \UU$ (by axioms (1) and (3), since $X - A \in \UU$). 
 			
-\end{proof}
+\end{prf}
 
-\begin{proof}[Proof that (ii) implies (i)]
+\begin{prf}[Proof that (ii) implies (i)]
 	Prove the \textbf{contrapositive}. Suppose $\UU$ is an ultrafilter with no limit. This means
 	\begin{equation}
 		\forall \alpha \in X, \exists V_\alpha \in \t : \alpha \in V_\alpha, V_\alpha \not\in \UU
@@ -1511,10 +1684,10 @@ Cantor space $\cC$ has
 	\begin{equation}
 		\cC = \Set{V_\alpha : \alpha \in X}
 	\end{equation}
-	\begin{claim}[]
+	\begin{claim}[]{}
 		$\cC$ is an (open) cover with no finite subcover.  
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		In words, there is no finite subcover iff no finite union is everything. We show each property.
 		\begin{enumerate}
 			\item $\cC$ is an open cover: $\forall \alpha\in X$, $\alpha \in V_\alpha \in \cC$, so $\bigcup \cC = X$.
@@ -1530,35 +1703,35 @@ Cantor space $\cC$ has
 		\end{enumerate}
 
 		This claim shows that $(X,\t)$ is not compact, which proves the contrapositive. 
-	\end{proof}
+	\end{prf}
 	
-\end{proof}
+\end{prf}
 
 
 
 \subsection{Proof of Tychonoff via ultrafilters}
 
-\begin{proof}[Proof of Tychonoff via ultrafilters]
+\begin{prf}[Proof of Tychonoff via ultrafilters]
 
 
-\end{proof}
+\end{prf}
 
 \section{Quotient Topology}
 
-\begin{definition}[Quotient Map]
+\begin{defi}[Quotient Map]{}
 	Let $(X,\t)$, $(Y,\sigma)$ be topological spaces. A map $f: (X,\t) \to (Y,\sigma)$ is a \navy{quotient map} with respect to $(\t,\sigma)$ iff
 	\begin{enumerate}
 		\item $\forall A \sse Y: A \in \sigma \iff \inv{f}(A) \in \t$ (in words, a subset $A$ of $Y$ is open in $Y$ iff $\inv{f}(A)$ is open in $X$).
 		\item $f$ surjective
 	\end{enumerate}
-\end{definition}
+\end{defi}
 
-\begin{definition}[Quotient topology]
+\begin{defi}[Quotient topology]{}
 	If $(X,\t)$ is a topological space and $f:(X,\t) \to Y$ ($Y \neq \emptyset$) surjective, then the \navy{quotient topology} given by $f$ is
 	\begin{equation}
 		\sigma = \Set{A \sse Y; \inv{f}(A) \in \t}
 	\end{equation}
-\end{definition}
+\end{defi}
 
 
 
@@ -1576,9 +1749,9 @@ Cantor space $\cC$ has
 	\end{itemize}
 	Show $(X,\t)$ and $(Y,\sigma)$ are topological spaces and $\t \otimes \sigma = \pP(X \times Y)$. 
 \end{exercise}
-\begin{proof}
+\begin{prf}
 	$(X,\t)$ and $(Y,\sigma)$ are clearly topological spaces since the power set is all possible subsets: this immediately implies all the axioms are satisfied. 
-\end{proof}
+\end{prf}
 
 
 
@@ -1603,14 +1776,14 @@ Cantor space $\cC$ has
 
 \section{Set Theory Review}
 
-\begin{definition}[Difference]
+\begin{defi}[Difference]{}
 	The \navy{difference} of two sets, denoted $A-B$, is the set consisting of those elements of $A$ that are not in $B$. In notation
 	\begin{equation*}
 		A - B = \{x | x \in A \text{ and } x \not\in B\}	
 	\end{equation*}
-\end{definition}
+\end{defi}
 
-\begin{theorem}[Set-Theoretic Rules]
+\begin{theo}[Set-Theoretic Rules]{}
 	We have that, for any sets $A, B, C$,
 	\begin{enumerate}
 		\item First distributive law for the operations $\cap$ and $\cup$:
@@ -1631,7 +1804,7 @@ Cantor space $\cC$ has
 		\end{equation}
 		``The complement of the intersection equals the union of the complements.''
 	\end{enumerate}
-\end{theorem}
+\end{theo}
 
 \subsection{Functions}
 
@@ -1701,15 +1874,15 @@ Cantor space $\cC$ has
 	\end{enumerate}
 \end{exercise}
 
-\begin{proof}[Proof of (i)]
+\begin{prf}[Proof of (i)]
 	We need to prove a simple result from set theory:
-	\begin{claim}
+	\begin{claim}{}
 		The preimage of the complement of a set is the complement of the preimage of that set. More precisely, suppose $f: X\to Y$ is a function and $U \sse Y$. Then 
 		\begin{equation}
 			\inv{f}(Y-U) = X - \inv{f}(U)
 		\end{equation}
 	\end{claim}
-	\begin{proof}
+	\begin{prf}
 		\begin{align*}
 			\inv{f}(Y-U) &= \Set{x \in X; f(x) \in Y-U} \\
 			&= \Set{x \in X; f(x) \in Y \text{ and } f(x) \not\in U} \\
@@ -1719,24 +1892,24 @@ Cantor space $\cC$ has
 			&= \inv{f}(Y) - \inv{f}(U) \\
 			&= X - \inv{f}(U) 
 		\end{align*}
-	\end{proof}
+	\end{prf}
 	Using this claim, let $U \in \sigma$. Then $Y - U$ is closed, and by assumption, $\inv{f}(Y-U)$ is also closed. By the claim, we have that $\inv{f}(Y-U) = X - \inv{f}(U)$. Thus $X - \inv{f}(U)$ is closed so that $\inv{f}(U)$ is open and $f$ is continuous. 
-\end{proof}
+\end{prf}
 
-\begin{proof}[Proof of (ii)]
+\begin{prf}[Proof of (ii)]
 	Suppose $\sigma$ is the indiscrete topology on $Y$. Let $U \in \sigma$. Then either $U = \emptyset$ or $U = X$. Then $\inv{f}(\emptyset) = \emptyset$ and $\inv{f}(Y) = X$. But since $\t$ is a topology, we must have that $\emptyset, X \in \t$. Therefore in both cases, $\inv{f}(U)$ is open (in $\t$ sense), so that $f$ is continuous. 
-\end{proof}
+\end{prf}
 
-\begin{proof}[Proof of (iii)]
+\begin{prf}[Proof of (iii)]
 	Suppose $\t$ is the discrete topology on $X$. Let $U \in \sigma$. But then $\inv{f}(U) \sse X$, so that $\inv{f}(U) \in \pP(X)$. Therefore $\inv{f}(U) \in \t$, so that $f$ is continuous. 
-\end{proof}
+\end{prf}
 
 \begin{exercise}
 	Give an example of a metric on $\RR$ which induces the discrete topology. 
 \end{exercise}
 \begin{solution}
 	The discrete metric induces the discrete topology. Recall:
-	\begin{claim}
+	\begin{claim}{}
 		A set is open in the metric topology induced by $d$ if and only if for each $y \in U$ there is a $\d > 0$ such that $B_d(y, \d) \ss U$.
 	\end{claim}
 	For $x,y \in \RR$, the discrete metric is defined by
@@ -1761,7 +1934,7 @@ Cantor space $\cC$ has
 		e(x,y) = \min\Set{d(x,y), 1}
 	\end{equation}
 \end{exercise}
-\begin{proof}
+\begin{prf}
 	Positivity (and definiteness) and symmetry follow immediately from properties of $d$ and $\min$. We need to show the triangle inequality holds. We prove this in two cases. Fix $x,y,x \in X$. We must show that $e(x,y) + e(y,z) \geq e(x,z)$. 
 	\begin{enumerate}
 		\item $d(x,y), d(y,z) \leq 1$. In this case, 
@@ -1772,7 +1945,7 @@ Cantor space $\cC$ has
 		If $d(x,z) \leq 1$, then $e(x,z) = \min\Set{d(x,z),1} = d(x,z)$. If $d(x,z) \geq 1$, then $d(x,z) \geq e(x,z) = \min\Set{d(x,z),1} = 1$. The triangle inequality holds in both cases. 
 		\item At least one of $d(x,y), d(y,z) \geq 1$. Notice that by definition $e(x,z) \leq 1$. In this case, $e(x,y) + e(y,z) \geq 1$ or even $e(x,y) + e(y,z) \geq 2$. But then since $e(x,z) \leq 1$, the triangle inequality follows. 
 	\end{enumerate}
-\end{proof}
+\end{prf}
 
 
 \begin{exercise}
