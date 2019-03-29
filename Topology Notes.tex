@@ -1713,10 +1713,51 @@ Cantor space $\cC$ has
 
 \begin{prf}[Proof of Tychonoff via ultrafilters]
 
-
 \end{prf}
 
 \section{Quotient Topology}
+
+\subsection{Review of set theory identities useful for quotient topologies}
+
+\begin{claim}[Intersections under image and preimage]{}
+	Suppose 
+	\begin{itemize}
+		\item $f: A \to B$
+		\item $X,Y \sse A$
+		\item $U,V \sse B$
+	\end{itemize}
+	Then
+	\begin{enumerate}
+		\item $f(X \cap Y) \sse f(X) \cap f(Y)$
+		\item $\inv{f}(U \cap V) = \inv{f}(U) \cap \inv{f}(V)$ 
+	\end{enumerate}
+\end{claim}
+
+\begin{prf}[Proof of 1]
+	Suppose $y \in f(A \cap B)$. Then $\exists x \in A\cap B$ such that $f(x) = y$. We have that
+	\begin{itemize}
+		\item $x \in A \imp y \in f(A)$
+		\item $x \in B \imp y \in f(B)$
+	\end{itemize}
+	So that $x \in f(A) \cap f(B)$. 
+
+	\textbf{BUT}, in general, we do not have that $f(A \cap B) \supseteq f(A) \cap f(B)$. Consider $X = Y = \RR$ and $f:\RR \to \RR:x \mapsto 0$. Take $C \sse \RR$ nonempty. Then $f(C) = \Set{f(c); c \in C} = \Set{0}$. Assuming $A,B \neq \emptyset$, we have that 
+	\begin{itemize}
+		\item $f(A) = \Set{0}$
+		\item $f(B) = \Set{0}$
+	\end{itemize}
+	so that $f(A) \cap f(B) = \Set{0}$. Suppose $A \cap B = \emptyset$. Then $f(A \cap B) = \emptyset$. Then $\emptyset \not\supseteq \Set{0}$. 
+\end{prf}
+
+\begin{prf}[Proof of 2]
+	\begin{align*}
+		x \in \inv{f}(U \cap V) &\iff f(x) \in U \cap V \\
+		&\iff (f(x) \in U) \cap (f(x) \in V) \\
+		&\iff (x \in \inv{f}(U)) \cap (x \in \inv{f}(V)) \\
+		&\iff x \in \inv{f}(U \cap V)
+	\end{align*}
+\end{prf}
+
 
 \begin{defi}[Quotient Map]{}
 	Let $(X,\t)$, $(Y,\sigma)$ be topological spaces. A map $f: (X,\t) \to (Y,\sigma)$ is a \navy{quotient map} with respect to $(\t,\sigma)$ iff
