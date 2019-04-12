@@ -1774,7 +1774,27 @@ Cantor space $\cC$ has
 	\end{equation}
 \end{defi}
 
+\begin{defi}[Saturated]{}
+	Let $A,B$ be sets and $f: A \to B$ a map between $A$ and $B$. A set $I \sse A$ is saturated (wrt $f$) if
+	\begin{equation}
+		\forall x \in I \quad f(y) = f(x) \imp y \in I
+	\end{equation}
+\end{defi}
 
+\begin{theo}[Alternate Characterization of Saturation]{}
+	$I$ is saturated wrt $f$ if and only if $\inv{f}(f(I)) = I$. 
+\end{theo}
+\begin{prf}[]{}
+	We show each direction:
+
+	$\imp$: Suppose $I$ is $f$-saturated. Let $u \in \inv{f}(f(I))$. We want to show that $u \in I$. We have that
+	\begin{equation}
+		\inv{f}(f(I)) = \Set{a \in A; f(a) \in f(I)}
+ 	\end{equation}
+ 	Thus there must be some $y \in I$ such that $f(u) = f(y)$. But $I$ is $f$-saturated, so we must have that $u=y$, so indeed $u \in I$. 
+
+ 	$\pmi$: Immediate. We have that $I \sse \inv{f}(f(I))$. 
+\end{prf}
 
 \newpage
 \section{Practice Questions}
