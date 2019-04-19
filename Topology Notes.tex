@@ -1796,6 +1796,25 @@ Cantor space $\cC$ has
  	$\pmi$: Immediate. We have that $I \sse \inv{f}(f(I))$. 
 \end{prf}
 
+\section{The Fundamental Group}
+
+\subsection{Homotopy}
+
+\begin{defi}[Homotopy, Homotopic]{}
+	Suppose $(X,\t)$ and $(Y,\sigma)$ are topological spaces. Suppose $f,g:(X,\t) \to (Y,\sigma)$ are continuous functions. A \navy{homotopy} from $f$ to $g$ is a map $H: X \times [0,1] \to Y$ such that
+	\begin{enumerate}
+		\item $H$ is continuous
+		\item For all $x$
+		\begin{equation}
+			\begin{cases}
+				H(x,0) = f(x) & \text{``starts out as $f$''} \\
+				H(x,1) = g(x) & \text{``ends up as $g$''}
+			\end{cases}
+		\end{equation}
+	\end{enumerate}
+	If there exists a homotopy, $f,g$ are \navy{homotopic}. 
+\end{defi}
+
 \newpage
 \section{Practice Questions}
 
